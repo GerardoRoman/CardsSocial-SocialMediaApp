@@ -1,0 +1,819 @@
+{
+  "uuid": "9499d1bc-717a-427c-87a3-bb82493f9b0d",
+  "lastMigration": 24,
+  "name": "Demo social card API",
+  "endpointPrefix": "api",
+  "latency": 0,
+  "port": 3000,
+  "routes": [
+    {
+      "uuid": "425506a8-243b-463e-aa5e-63bedf0a7649",
+      "documentation": "Create a user",
+      "method": "post",
+      "endpoint": "auth/users/",
+      "responses": [
+        {
+          "uuid": "4d0a5aae-1a8a-4567-82de-602c30a2ea45",
+          "body": "{\n    \"id\": 1,\n    \"username\": \"{{ body 'username' 'testuser' }}\"\n}",
+          "latency": 50,
+          "statusCode": 201,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "5a14b3ec-0961-44c4-b299-b5b352e7d29a",
+      "documentation": "Get token for username and password",
+      "method": "post",
+      "endpoint": "auth/token/login/",
+      "responses": [
+        {
+          "uuid": "c608bbfb-6e5b-4e15-88b0-0b33ca8d5944",
+          "body": "{\n  \"non_field_errors\": [\n    \"Unable to log in with provided credentials.\"\n  ]\n}",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "44687c84-4607-4824-acf9-2b0da411d4c2",
+          "body": "{\n    \"auth_token\": \"testtoken\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "e18d858b-aad3-47d5-9948-ef420423616a",
+      "documentation": "Get my user info",
+      "method": "get",
+      "endpoint": "auth/users/me/",
+      "responses": [
+        {
+          "uuid": "2521604b-a55d-40af-ba40-170b503a335c",
+          "body": "{\n  \"detail\": \"Invalid token.\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "347685db-0017-4770-b216-e6eb9bcde125",
+          "body": "{\n    \"id\": 1,\n    \"username\": \"testuser\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "892c2d91-b4f9-45d0-9f55-f363a3c3fccb",
+      "documentation": "Get a list of cards from my friends",
+      "method": "get",
+      "endpoint": "cards/",
+      "responses": [
+        {
+          "uuid": "6db98660-9324-4299-b91d-8a10cbe687f8",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "14f543b0-cb64-4b8c-9b64-a9ebff469824",
+          "body": "{\n    \"count\": 10,\n    \"results\": [\n        {{#repeat 10}}\n        {\n            \"id\": {{@index}},\n            \"author\": {\n                \"id\": {{ int 2 20 }},\n                \"username\": \"{{ lowercase (firstName) }}\"\n            },\n            \"url\": \"http://localhost:3000/api/cards/{{@index}}/\",\n            \"color\": \"{{ oneOf (array 'blue' 'yellow' 'eggshell' 'purple') }}\",\n            \"font\": \"{{ oneOf (array 'Raleway' 'Pangolin' 'Yellowtail' 'Merriweather') }}\",\n            \"border\": \"{{ oneOf (array 'links' 'solid' 'dashed' 'none') }}\",\n            \"message\": \"{{lorem 20}}\",\n            \"posted_at\": \"{{ date '2019' '2020' 'YYYY-MM-DDTHH:mm:ss-05:00' }}\"\n        }\n        {{/repeat}}\n    ]\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "27e77256-7fb9-4d72-9e26-88ff0c564652",
+      "documentation": "Get a list of all cards",
+      "method": "get",
+      "endpoint": "cards/all/",
+      "responses": [
+        {
+          "uuid": "3d5f8b67-0832-4268-8b9b-0c268f461428",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "cfe2a400-3417-4b81-8227-e14a81aa7374",
+          "body": "{\n    \"count\": 10,\n    \"results\": [\n        {{#repeat 10}}\n        {\n            \"id\": {{@index}},\n            \"author\": {\n                \"id\": {{ int 2 20 }},\n                \"username\": \"{{ lowercase (firstName) }}\"\n            },\n            \"url\": \"http://localhost:3000/api/cards/{{@index}}/\",\n            \"color\": \"{{ oneOf (array 'blue' 'yellow' 'eggshell' 'purple') }}\",\n            \"font\": \"{{ oneOf (array 'Raleway' 'Pangolin' 'Yellowtail' 'Merriweather') }}\",\n            \"border\": \"{{ oneOf (array 'links' 'solid' 'dashed' 'none') }}\",\n            \"message\": \"{{lorem 20}}\",\n            \"posted_at\": \"{{ date '2019' '2020' 'YYYY-MM-DDTHH:mm:ss-05:00' }}\"\n        }\n        {{/repeat}}\n    ]\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "0832b454-fbf9-41d8-9bbc-0073a7e82975",
+      "documentation": "Get a list of my cards",
+      "method": "get",
+      "endpoint": "cards/me/",
+      "responses": [
+        {
+          "uuid": "d068c2e6-256b-4e21-b1e0-f04fabd8ab20",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "5c055aee-e2fa-44f2-bfe2-447ab343b310",
+          "body": "{\n    \"count\": 10,\n    \"results\": [\n        {{#repeat 10}}\n        {\n            \"id\": {{@index}},\n            \"author\": {\n                \"id\": 1,\n                \"username\": \"testuser\"\n            },\n            \"url\": \"http://localhost:3000/api/cards/{{@index}}/\",\n            \"color\": \"{{ oneOf (array 'blue' 'yellow' 'eggshell' 'purple') }}\",\n            \"font\": \"{{ oneOf (array 'Raleway' 'Pangolin' 'Yellowtail' 'Merriweather') }}\",\n            \"border\": \"{{ oneOf (array 'links' 'solid' 'dashed' 'none') }}\",\n            \"message\": \"{{lorem 20}}\",\n            \"posted_at\": \"{{ date '2019' '2020' 'YYYY-MM-DDTHH:mm:ss-05:00' }}\"\n        }\n        {{/repeat}}\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "53b62de7-710e-40d9-9920-7433a69fc178",
+      "documentation": "Create card",
+      "method": "post",
+      "endpoint": "cards/",
+      "responses": [
+        {
+          "uuid": "22792aaf-2b7b-4a56-9673-0ceb8766e2d5",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "d02355c3-bfcb-4094-87aa-85a4946ed85a",
+          "body": "{\n    \"author\": {\n        \"id\": 1,\n        \"username\": \"testuser\"\n    },\n    \"url\": \"http://localhost:3000/api/cards/{{ int 100 200 }}/\",\n    \"color\": \"{{ body 'color' }}\",\n    \"font\": \"{{ body 'font' }}\",\n    \"border\": \"{{ body 'border' }}\",\n    \"message\": \"{{ body 'message' }}\",\n    \"posted_at\": \"{{ now }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2fa4e639-ccab-47b8-a87a-7cdf0cfb67cc",
+      "documentation": "Get one card",
+      "method": "get",
+      "endpoint": "cards/:id/",
+      "responses": [
+        {
+          "uuid": "1707368e-852b-47bc-961b-b3b1d3a107fe",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "fd913e2a-af96-4092-873e-db734716d00f",
+          "body": "{\n    \"id\": {{ urlParam 'id'}},\n    \"author\": {\n        \"id\": {{ int 2 20 }},\n        \"username\": \"{{ lowercase (firstName) }}\"\n    },\n    \"url\": \"http://localhost:3000/api/cards/{{ urlParam 'id'}}/\",\n    \"color\": \"{{ oneOf (array 'blue' 'yellow' 'eggshell' 'purple') }}\",\n    \"font\": \"{{ oneOf (array 'Raleway' 'Pangolin' 'Yellowtail' 'Merriweather') }}\",\n    \"border\": \"{{ oneOf (array 'links' 'solid' 'dashed' 'none') }}\",\n    \"message\": \"{{lorem 20}}\",\n    \"posted_at\": \"{{ date '2019' '2020' 'YYYY-MM-DDTHH:mm:ss-04:00' }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "984c0854-fb78-4f28-9160-3a8c1e094af9",
+      "documentation": "Update card",
+      "method": "patch",
+      "endpoint": "cards/:id/",
+      "responses": [
+        {
+          "uuid": "b18d1a45-61c7-4d78-9a89-4c21d0c2499a",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "6d7f8940-7bed-4f54-bfc5-44b756178b2e",
+          "body": "{\n    \"author\": {\n        \"id\": 1,\n        \"username\": \"testuser\"\n    },\n    \"id\": {{ urlParam 'id'}},\n    \"url\": \"http://localhost:3000/api/cards/{{ urlParam 'id'}}/\",\n    \"color\": \"{{ body 'color' }}\",\n    \"font\": \"{{ body 'font' }}\",\n    \"border\": \"{{ body 'border' }}\",\n    \"message\": \"{{ body 'message' }}\",\n    \"posted_at\": \"{{ date '2019' '2020' 'YYYY-MM-DDTHH:mm:ss-04:00' }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "a0e13c93-26c8-4e78-b532-1a462e094e9a",
+      "documentation": "Delete card",
+      "method": "delete",
+      "endpoint": "cards/:id/",
+      "responses": [
+        {
+          "uuid": "5fe2af94-551c-4648-94e8-a03c4ad95027",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "817e4687-4c6d-4d5e-80bc-2780e7727cfc",
+          "body": "{}\n",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "188bb665-b1a6-4e7d-8e3f-bcac0cdec892",
+      "documentation": "Get a list of my friends",
+      "method": "get",
+      "endpoint": "friends/",
+      "responses": [
+        {
+          "uuid": "e5a23c87-80f0-4c97-957a-c7f08d6455b7",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "19481555-a2cd-4036-8e17-650fdee87b06",
+          "body": "[\n{{#repeat 10}}\n    {\n        \"id\": {{ int 2 20 }},\n        \"username\": \"{{ lowercase (firstName) }}\"\n    }\n{{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b3f29335-e487-4c8d-a4a7-f1238e0391dc",
+      "documentation": "Add a friend",
+      "method": "post",
+      "endpoint": "friends/",
+      "responses": [
+        {
+          "uuid": "7db3d66d-23d9-4fab-bbf7-8580afcce201",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "c59a243f-77d4-499e-bad7-78a3e78dc91c",
+          "body": "{\n    \"id\": {{ body 'id' }},\n    \"username\": \"{{ lowercase (firstName) }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "adc2eb15-9909-462b-8ce5-b4a9452fee37",
+      "documentation": "Remove",
+      "method": "delete",
+      "endpoint": "friends/:userId/",
+      "responses": [
+        {
+          "uuid": "5e8ebb3d-76b1-4aa5-9cfa-3983046fb8a2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "801fe311-6cfe-4867-ab00-28b385da3b19",
+          "body": "{}\n",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Token testtoken",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "disableTemplating": false,
+          "rulesOperator": "OR",
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyRemovePrefix": false,
+  "hostname": "0.0.0.0",
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "data": []
+}
