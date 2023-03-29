@@ -1,9 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import NewCard from './new-card.js'
 
 function App() {
   return (
-   <></>
+   <>
+   <NewCard/>
+   </>
   );
 }
 
