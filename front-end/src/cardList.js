@@ -9,6 +9,12 @@ export default function CardList(props) {
 
 
     return (
-        <ul> {cardArray} </ul>
+        <>
+            <ul>
+                {cardArray.map((listingCards) => (
+                    <li> {listingCards} </li>
+                ))}
+            </ul>
+        </>
     )
 }
