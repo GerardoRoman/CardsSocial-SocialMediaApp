@@ -91,7 +91,8 @@ function NewCard(){
         <div> 
             <div className='title'>Example Title</div>
                 <div className='card-body'>
-                    Example Text               
+                    <textarea id='body' rows='25' cols='33' placeholder='Roses are red...'>
+                    </textarea>               
             </div>
         </div>
                 </FontChoice> 
