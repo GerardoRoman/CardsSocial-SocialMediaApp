@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import User, Card
+from .models import User, Card, Follower
 
 admin.site.register(User)
 admin.site.register(Card)
+admin.site.register(Follower)
