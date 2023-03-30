@@ -4,7 +4,7 @@ https://social-cards-app.onrender.com/   ----------------->  Base url -- (Reques
 
 /cards/<id>/   ----------->  Card detail -- (Request: GET)
 
-/cards/search/  ---------->  Search through cards (search based on messages, font, color and border) -- (Request: GET)
+/cards/search/  ---------->  Search cards (based on messages, font, color, border) -- (Request: GET)
 
 /users/   ---------------->  List out all users -- (Request: GET)
 
