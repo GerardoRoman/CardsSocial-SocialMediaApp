@@ -4,10 +4,6 @@ import CardList from "./cardList";
 
 
 export default function Cards(props) {
-    // in a single card array, there's 3 aspects in an array
-    // background color
-    // border
-    // font 
     const cardInfo = [
         { color: 'green', border: 'solid', font: 'r' },
         { color: 'black', border: 'solid', font: 'r' },
