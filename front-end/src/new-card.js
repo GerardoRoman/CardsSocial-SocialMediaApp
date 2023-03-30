@@ -8,6 +8,8 @@ function NewCard(){
     const [background, setBackground] = useState('')
     const [border, setBorder] = useState('')
     const [font, setFont] = useState(null)
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
     const colorChoices = ['Blue', 'Red', 'Green']
     const borderChoices = ['Dotted', 'Dashed', 'Solid']
     const fontChoices = ['Handwritten', 'Plain', 'Cursive']
@@ -19,19 +21,24 @@ function NewCard(){
         `
     const BorderChoice = styled.section`
         border: 5px ${border} black;  
-        width: 100%;
-        height: 100%;
+        width: 99%;
+        height: 99%;
     `
 
     const FontChoice = styled.section`
         font-family: ${font};
     `
-  
-   
 
     useEffect(() => {
         console.log('useEffect runs')
     })
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    console.log('Background Color: ', background);
+    console.log('Border Selection: ', border);
+    console.log('Font Selection: ', font);
+    }
 
     function backgroundChoice(colors) {
         console.log('clicked')
@@ -76,6 +83,7 @@ function NewCard(){
         <>
         <h1>New Card</h1>
         <br></br>
+        
         <div className='card'>
         <BackgroundColor> 
             <BorderChoice>  
@@ -92,14 +100,30 @@ function NewCard(){
         </div>
         <br></br>
         <span>
-        {colorChoices.map(colors => <button onClick={backgroundChoice}>{colors}</button>)}
+        {colorChoices.map(colors => <button className='color-buttons' onClick={backgroundChoice}>{colors}</button>)}
         </span>
         <span>
-            {borderChoices.map(borders => <button onClick={borderChoice}>{borders}</button>)}
+            {borderChoices.map(borders => <button className='border-buttons' onClick={borderChoice}>{borders}</button>)}
         </span>
         <span>
-            {fontChoices.map(fonts => <button onClick={fontChoice}>{fonts}</button>)}
+            {fontChoices.map(fonts => <button className='font-buttons'onClick={fontChoice}>{fonts}</button>)}
         </span>
+        
+        <form onSubmit={handleSubmit}>
+            <div>
+            <label>Color Choice: </label>
+                <input value={background} readOnly={true}></input>
+            </div>
+            <div>
+            <label>Border Choice: </label>
+                <input value={border} readOnly={true}></input>
+            </div>
+            <div>
+            <label>Font Choice: </label>
+                <input value={font} readOnly={true}></input>
+            </div>
+            <button type='submit'>Submit</button>
+        </form>
         
         </>
     );
