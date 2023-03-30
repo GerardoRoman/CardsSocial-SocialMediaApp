@@ -6,9 +6,9 @@ import Profile from './profile.js'
 function App() {
   return (
     <>
-      <Cards />
+      {/* <Cards />
       <CardList />
-      <Profile />
+      <Profile /> */}
     </>
   );
 }
