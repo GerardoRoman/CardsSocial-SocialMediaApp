@@ -1,14 +1,41 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
+.header {
+    /* Styles for the header element */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 
-.header {
+.navbar {
+    /* Styles for the navigation bar */
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 80px;
-    padding: 0 2rem;
+}
+
+.hamburger {
+    /* Styles for the hamburger menu */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.hamburger button {
+    /* Styles for the hamburger menu button */
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+
+.hamburger li {
+    /* Styles for the hamburger menu links */
+    list-style: none;
+    margin: 10px 0;
+}
+
+.hamburger li a {
+    /* Styles for the hamburger menu links */
+    color: #000;
+    text-decoration: none;
 }
