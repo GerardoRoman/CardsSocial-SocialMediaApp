@@ -13,6 +13,21 @@ function NewCard(){
     const borderChoices = ['Dotted', 'Dashed', 'Solid']
     const fontChoices = ['Handwritten', 'Plain', 'Cursive']
 
+    const StyledTextArea = styled.textarea`
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        overflow: auto;
+        outline: none;
+        // border: 1px solid blackl;
+        width: 75%;
+        height: 23rem;
+        rows: "33";
+        cols: "50";
+        resize: none;
+        font-family: ${font};
+        font-size: 30px;
+    `
+
     const BackgroundColor = styled.section`
         background: ${background};
         width: 100%;
@@ -20,13 +35,15 @@ function NewCard(){
         `
     const BorderChoice = styled.section`
         border: 5px ${border} black;  
-        width: 99%;
-        height: 99%;
+        width: 98%;
+        height: 98%;
     `
 
     const FontChoice = styled.section`
         font-family: ${font};
     `
+
+    
 
     useEffect(() => {
         console.log('useEffect runs')
@@ -78,27 +95,16 @@ function NewCard(){
         }
     }
 
+    const handleBodyChange = event => {
+        setBody(event.target.value);
+        console.log(body);
+    }
+
     return (
         <>
         <h1>New Card</h1>
         <br></br>
         
-        <div className='card'>
-        <BackgroundColor> 
-            <BorderChoice>  
-                <FontChoice>      
-        <div> 
-            <div className='title'>Example Title</div>
-                <div className='card-body'>
-                    <textarea id='body' rows='25' cols='33' placeholder='Roses are red...'>
-                    </textarea>               
-            </div>
-        </div>
-                </FontChoice> 
-            </BorderChoice>
-        </BackgroundColor>
-        </div>
-        <br></br>
         <span>
         {colorChoices.map(colors => <button className='color-buttons' onClick={backgroundChoice}>{colors}</button>)}
         </span>
@@ -108,6 +114,21 @@ function NewCard(){
         <span>
             {fontChoices.map(fonts => <button className='font-buttons'onClick={fontChoice}>{fonts}</button>)}
         </span>
+        <div className='card'>
+        <BackgroundColor> 
+            <BorderChoice>  
+                <FontChoice>      
+        <div> 
+            <div className='title'>Example Title</div>
+                <div className='card-body'>
+                    <StyledTextArea placeholder='Roses are red' id='body-text' value={body} onChange={handleBodyChange}></StyledTextArea>              
+            </div>
+        </div>
+                </FontChoice> 
+            </BorderChoice>
+        </BackgroundColor>
+        </div>
+        <br></br>
         
         <form onSubmit={handleSubmit}>
             <div>
@@ -121,6 +142,10 @@ function NewCard(){
             <div>
             <label>Font Choice: </label>
                 <input value={font} readOnly={true}></input>
+            </div>
+            <div>
+                <label for='body-text'>Body Text: </label>
+                <input></input>
             </div>
             <button type='submit'>Submit</button>
         </form>
