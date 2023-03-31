@@ -1,3 +1,5 @@
+from .models import Followship, User
+from rest_framework.views import APIView
 from django.shortcuts import render
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 from .models import User, Card
-from .serializers import CardSerializer, UserSerializer, FollowerSerializer
+from .serializers import CardSerializer, UserSerializer
 
 
 @api_view(["GET"])

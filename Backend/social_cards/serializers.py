@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Card, Follower
+from .models import User, Card, Followship
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -12,25 +12,23 @@ class CardSerializer(serializers.ModelSerializer):
         )
 
 
-class FollowerSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Follower
-        fields = (
-            "following",
-            "follower",
-        )
-
-
 class UserSerializer(serializers.ModelSerializer):
-    following = serializers.StringRelatedField(many=True)
-    followers = serializers.StringRelatedField(many=True)
+    followers = serializers.SerializerMethodField("get_followers_list")
+    following = serializers.SerializerMethodField("get_following_list")
 
     class Meta:
         model = User
         fields = (
             "id",
             "username",
-            "following",
             "followers",
+            "following",
         )
+
+    def get_followers_list(self, obj):
+        queryset = Followship.objects.filter(following=obj)
+        return [followship.follower.username for followship in queryset]
+
+    def get_following_list(self, obj):
+        queryset = Followship.objects.filter(follower=obj)
+        return [followship.following.username for followship in queryset]
