@@ -19,3 +19,21 @@ class Card(models.Model):
 
     def __str__(self):
         return f"{self.card_front_message} by {self.created_by}"
+
+
+class Followship(models.Model):
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='people_i_follow')
+    follower = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='users_following_me')
+
+    @property
+    def get_username_follower(self):
+        return self.follower.username
+
+    @property
+    def get_username_following(self):
+        return self.following.username
+
+    def __str__(self):
+        return f"{self.follower.username} follows {self.following.username}"
