@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 
 
+
 function NewCard(){
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
@@ -92,14 +93,18 @@ function NewCard(){
     console.log('Body Text: ', Body.current.value);
     console.log('Back Text: ', Back.current.value);
     setResultsObject({
-        color: background,
-        border: border,
-        font: font,
         title_text: Title.current.value,
         card_front_message: Body.current.value,
         card_back_message: Back.current.value,
+        color: background,
+        border: border,
+        font: font,
     })
-    fetch()
+    fetch(`https://social-cards-app.onrender.com/cards/create/`, {
+        method: 'POST',
+        mode: 'cors',
+        body: resultsObject.stringify
+    })
     }
 
     console.log(resultsObject)
