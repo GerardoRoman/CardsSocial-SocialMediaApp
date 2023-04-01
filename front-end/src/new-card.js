@@ -99,6 +99,7 @@ function NewCard(){
         card_front_message: Body.current.value,
         card_back_message: Back.current.value,
     })
+    fetch()
     }
 
     console.log(resultsObject)
@@ -152,14 +153,17 @@ function NewCard(){
         <div className='customize-buttons'>
             <br/>
         <span>
+            Select a background color!<br/>
         {colorChoices.map(colors => <button className='ind-but' onClick={backgroundChoice}>{colors}</button>)}
         </span>
         <br/>
         <span>
+        Select a background border!<br/>
             {borderChoices.map(borders => <button className='ind-but' onClick={borderChoice}>{borders}</button>)}
         </span>
         <br/>
         <span>
+        Select a background font!<br/>
             {fontChoices.map(fonts => <button className='ind-but' onClick={fontChoice}>{fonts}</button>)}
         </span>   
         
