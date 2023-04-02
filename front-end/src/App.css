@@ -1,0 +1,45 @@
+.card-container {
+    display: flex;
+}
+
+.card {
+    /* border: 2px solid black; */
+    width: 20rem;
+    height: 20rem;
+    margin: auto;
+    padding: 2px;
+
+}
+
+.title {
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.card-body {
+    text-align: center;
+    margin-top: 5%;
+    font-size: larger;
+}
+
+h1 {
+    text-align: center;
+}
+
+.customize-buttons {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+
+.submit {
+    /* border: 1px solid black; */
+    text-align: center;
+    
+}
+
+
+
+
