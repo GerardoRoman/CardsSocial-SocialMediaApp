@@ -1,11 +1,11 @@
-import App from "./App";
+import App from "../App";
 import { useState } from 'react';
 
 // username component
-// follow/unfollow button
-// card list
-// cards 
-// nav-bar 
+// follow/unfollow button component
+// card list component
+// cards component
+// nav-bar component
 
 export default function Profile() {
 
