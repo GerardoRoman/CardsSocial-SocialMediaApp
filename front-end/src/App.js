@@ -22,8 +22,8 @@ function App() {
 
   return (
     <>
-    <CardList />
       {/* <Navbar />
+    <CardList />
     <Cards />
     <NewCard />
       <Profile /> */}
