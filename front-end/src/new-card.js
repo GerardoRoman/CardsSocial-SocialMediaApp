@@ -11,7 +11,7 @@ function NewCard(){
     const [font, setFont] = useState(null);
     const Title = useRef('')
     const Body = useRef('');
-    const Back = useRef('')
+    const Back = useRef('');
     const colorChoices = ['Blue', 'Red', 'Green'];
     const borderChoices = ['Dotted', 'Dashed', 'Solid'];
     const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
@@ -31,7 +31,7 @@ function NewCard(){
         cols: "50";
         resize: none;
         font-family: ${font};
-        font-size: 30px;
+        font-size: 25px;
     `
     const StyledBackArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
@@ -48,6 +48,21 @@ function NewCard(){
         text-align: center;
         margin-top: 30%        
     `
+    // const StyledCoverArea = styled.textarea`
+    //     background-color: rgba(0, 0, 0, 0);
+    //     border-color: rgba(0, 0, 0, 0);
+    //     outline: none;
+    //     // border: 1px solid black;
+    //     width: 75%;
+    //     height: 23rem;
+    //     rows: "33";
+    //     cols: "50";
+    //     resize: none;
+    //     font-family: ${font};
+    //     font-size: 30px;
+    //     text-align: center;
+    //     margin-top: 30%        
+    // `
 
 
     const TitleBox = styled.input`
@@ -63,7 +78,7 @@ function NewCard(){
     resize: none;
     text-align: center;
     // border-bottom: 2px solid black
-    margin-top: 3px;
+    margin-top: 30%;
     `
 
     const BackgroundColor = styled.section`
@@ -112,8 +127,11 @@ function NewCard(){
     function handlePost(){
     axios.post('https://social-cards-app.onrender.com/cards/create/', 
         resultsObject,
-    {
-        'Content-Type': 'application/json'
+    {   
+        headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `${token}`
+        }
     })
     .then(function(response){
         console.log(response);
@@ -186,6 +204,22 @@ function NewCard(){
         </span>   
         
         </div>
+        <div className='card'>
+                <h1>COVER</h1>
+            <BackgroundColor> 
+                <BorderChoice>  
+                    <FontChoice>      
+            <div> 
+                    <div className='card-back'>
+                    <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>                </div>
+            </div>
+                    </FontChoice> 
+                </BorderChoice>
+            </BackgroundColor>
+            </div>
+        <br />
+        <br />
+        <br />
         <br />
         <div className='card-container'>
             <div className='card'>
@@ -194,7 +228,6 @@ function NewCard(){
                 <BorderChoice>  
                     <FontChoice>      
             <div> 
-                <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>
                     <div className='card-body'>
                         <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={Body}></StyledTextArea>              
                 </div>
@@ -225,27 +258,27 @@ function NewCard(){
         <form onSubmit={handleSubmit}>
             <div>
             <label></label>
-                <input value={background} readOnly={true} hidden={true}></input>
+                <input value={background} readOnly={true} hidden={true}/>
             </div>
             <div>
             <label></label>
-                <input value={border} readOnly={true} hidden={true}></input>
+                <input value={border} readOnly={true} hidden={true}/>
             </div>
             <div>
             <label></label>
-                <input value={font} readOnly={true} hidden={true}></input>
+                <input value={font} readOnly={true} hidden={true}/>
             </div>
             <div>
                 <label for='body-text'></label>
-                <input value={Body.current} hidden={true}></input>
+                <input value={Body.current} hidden={true}/>
             </div>
             <div>
                 <label for='title-text'></label>
-                <input value={Title.current} hidden={true}></input>
+                <input value={Title.current} hidden={true}/>
             </div>
             <div>
             <label for='back-text'></label>
-                <input value={Back.current} hidden ></input>
+                <input value={Back.current} hidden />
             </div>
             <div className='submit'>
             <button type='submit' readOnly={true} disabled={enabled}>Set Card</button>
