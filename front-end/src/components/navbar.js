@@ -7,7 +7,7 @@ function Navbar() {
 
     return ( 
         <header className='header'>
-            <h3>Testing</h3>
+            <h3>Social Cards</h3>
             <nav className='navbar'>
                 <div className='hamburger'>
                 {expanded && <div>
