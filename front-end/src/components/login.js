@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import Error from './error.js'
 
@@ -6,6 +6,7 @@ const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [key, setKey] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -13,14 +14,25 @@ const Login = ({ setAuth }) => {
         console.log(username)
         console.log(password)
         // ADD URL FROM DJOSER
-        axios.post('', {
+        axios.post('https://social-cards-app.onrender.com/token/login/', {
             // CHANGE- HARD CODING IT FOR NOW
             username: username,
             password: password
         }).then(res => {
-            setAuth(res.data.auth_token, username)
+            const token = res.data.auth_token;
+            axios.get(`https://social-cards-app.onrender.com/auth/token/login/`,
+                {
+                    headers: { Authorization: `Token ${token}` }
+                }
+            ).then((res) => {
+                setKey(username, token);
+                console.log(res.data);
+                // navigate("/profile");
+            })
+            // .catch((e) => {
         })
-    }
+    };
+
 
     return (
         <>
