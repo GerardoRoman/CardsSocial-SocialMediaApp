@@ -1,4 +1,4 @@
-import App from "../App";
+import App from "./App";
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 
