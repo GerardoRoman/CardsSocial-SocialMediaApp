@@ -31,7 +31,7 @@ function NewCard(){
         cols: "50";
         resize: none;
         font-family: ${font};
-        font-size: 30px;
+        font-size: 25px;
     `
     const StyledBackArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
@@ -112,8 +112,11 @@ function NewCard(){
     function handlePost(){
     axios.post('https://social-cards-app.onrender.com/cards/create/', 
         resultsObject,
-    {
-        'Content-Type': 'application/json'
+    {   
+        headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `${token}`
+        }
     })
     .then(function(response){
         console.log(response);
@@ -225,27 +228,27 @@ function NewCard(){
         <form onSubmit={handleSubmit}>
             <div>
             <label></label>
-                <input value={background} readOnly={true} hidden={true}></input>
+                <input value={background} readOnly={true} hidden={true}/>
             </div>
             <div>
             <label></label>
-                <input value={border} readOnly={true} hidden={true}></input>
+                <input value={border} readOnly={true} hidden={true}/>
             </div>
             <div>
             <label></label>
-                <input value={font} readOnly={true} hidden={true}></input>
+                <input value={font} readOnly={true} hidden={true}/>
             </div>
             <div>
                 <label for='body-text'></label>
-                <input value={Body.current} hidden={true}></input>
+                <input value={Body.current} hidden={true}/>
             </div>
             <div>
                 <label for='title-text'></label>
-                <input value={Title.current} hidden={true}></input>
+                <input value={Title.current} hidden={true}/>
             </div>
             <div>
             <label for='back-text'></label>
-                <input value={Back.current} hidden ></input>
+                <input value={Back.current} hidden />
             </div>
             <div className='submit'>
             <button type='submit' readOnly={true} disabled={enabled}>Set Card</button>

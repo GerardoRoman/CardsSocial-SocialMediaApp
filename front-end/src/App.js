@@ -24,9 +24,10 @@ function App() {
     <>
       <Navbar />
       <NewCard />
-      {/* <Cards />
-      <CardList />
-      <Profile />  */}
+      
+       {/* <Cards />
+      {/* {<CardList />
+      <Profile />} */}
     </>
   );
 }
