@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 
-function Followers() {
-    const [followers, setFollowers] = useState()
+// function Followers() {
+//     const [followers, setFollowers] = useState()
     
 
-    useEffect(() => {
+//     useEffect(() => {
         
-    })
-}
+//     })
+// }
 

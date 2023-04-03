@@ -26,7 +26,10 @@ function App() {
       <Routes>
         <Route path='/' element= {<CardList />} />
         <Route path='/new' element= {<NewCard />} />
-        <Route path='/' element= {<CardList />} />
+        <Route path='/profile' element= {<Profile />} />
+        {/* <Route path='/cardview' element= {<Cards />} /> */}
+        {/* <Route path='/login' element= {<LogIn />} />
+        <Route path='/logout' element= {<LogOut />} /> */}
       </Routes>
       {/* <Cards />
       <CardList />
