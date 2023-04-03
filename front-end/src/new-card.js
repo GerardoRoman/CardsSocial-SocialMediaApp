@@ -112,8 +112,11 @@ function NewCard(){
     function handlePost(){
     axios.post('https://social-cards-app.onrender.com/cards/create/', 
         resultsObject,
-    {
-        'Content-Type': 'application/json'
+    {   
+        headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `${token}`
+        }
     })
     .then(function(response){
         console.log(response);
