@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import axios from 'axios'
 import Error from './error.js'
 
-const Login ({ setAuth }) => {
+const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -18,15 +18,15 @@ const Login ({ setAuth }) => {
             username: username,
             password: password
         }).then(res => {
-            sethAuth(res.data.auth_token, username)
+            setAuth(res.data.auth_token, username)
         })
     }
 
     return (
         <>
-            <div>
-                <h1>Log In</h1>
-                <form onFocus={() => setError(null)} onSubmit={handleSubmit}>
+            <h1>Log In</h1>
+            <form onFocus={() => setError(null)} onSubmit={handleSubmit}>
+                <div>
                     <label> <span>username</span></label>
                     <input
                         type='text'
@@ -37,24 +37,24 @@ const Login ({ setAuth }) => {
                         onChange={(e) => setUsername(e.target.value)}
                     >
                     </input>
-            </div>
-            <div>
-                <label><span>password</span></label>
-                <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    value={password}
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                >
-                </input>
-            </div>
-            <div>
-                <button type='submit'>Submit!</button>
-            </div>
-        </form>
-        { error && <Error message={error.message} /> }
+                </div>
+                <div>
+                    <label><span>password</span></label>
+                    <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        value={password}
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                    >
+                    </input>
+                </div>
+                <div>
+                    <button type='submit'>Submit!</button>
+                </div>
+            </form>
+            {error && <Error message={error.message} />}
         </>
     )
 }
