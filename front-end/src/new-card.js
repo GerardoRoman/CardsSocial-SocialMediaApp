@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components'
+import axios from 'axios'
 
 
 
@@ -14,7 +15,9 @@ function NewCard(){
     const colorChoices = ['Blue', 'Red', 'Green'];
     const borderChoices = ['Dotted', 'Dashed', 'Solid'];
     const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
-    const [resultsObject, setResultsObject] = useState([])
+    const [resultsObject, setResultsObject] = useState([]);
+    const [disabled, setDisabled] = useState(true)
+    const [enabled, setEnabled] = useState(false)
 
     const StyledTextArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
@@ -100,18 +103,28 @@ function NewCard(){
         border: border,
         font: font,
     })
-    fetch(`https://social-cards-app.onrender.com/cards/create/`, {
-        method: 'POST',
-        mode: 'cors',
-        body: resultsObject.stringify
-    })
+    setDisabled(false)
+    setEnabled(true)
     }
 
     console.log(resultsObject)
 
+    function handlePost(){
+    axios.post('https://social-cards-app.onrender.com/cards/create/', 
+        resultsObject,
+    {
+        'Content-Type': 'application/json'
+    })
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+    setDisabled(true)
+    setEnabled(false)
+    ;}
     
-
-
     function backgroundChoice(colors) {
         console.log('clicked')
         if (colors.target.innerText === 'Blue'){
@@ -176,13 +189,14 @@ function NewCard(){
         <br />
         <div className='card-container'>
             <div className='card'>
+                <h1>FRONT</h1>
             <BackgroundColor> 
                 <BorderChoice>  
                     <FontChoice>      
             <div> 
                 <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>
                     <div className='card-body'>
-                        <StyledTextArea placeholder='Roses are red' id='body' name='body' ref={Body}></StyledTextArea>              
+                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={Body}></StyledTextArea>              
                 </div>
             </div>
                     </FontChoice> 
@@ -191,6 +205,7 @@ function NewCard(){
             </div>
 
             <div className='card'>
+                <h1>BACK</h1>
             <BackgroundColor> 
                 <BorderChoice>  
                     <FontChoice>      
@@ -233,10 +248,10 @@ function NewCard(){
                 <input value={Back.current} hidden ></input>
             </div>
             <div className='submit'>
-            <button type='submit' readOnly={true}>Submit</button>
+            <button type='submit' readOnly={true} disabled={enabled}>Set Card</button>
+            <button onClick={handlePost} disabled={disabled}>POST</button>
             </div>
         </form>
-        
         </>
     );
 }
