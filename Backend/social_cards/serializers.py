@@ -15,12 +15,14 @@ class CardSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     followers = serializers.SerializerMethodField("get_followers_list")
     following = serializers.SerializerMethodField("get_following_list")
+    cards_created = serializers.SerializerMethodField("get_cards_made_by_user")
 
     class Meta:
         model = User
         fields = (
             "id",
             "username",
+            "cards_created",
             "followers",
             "following",
         )
@@ -32,3 +34,10 @@ class UserSerializer(serializers.ModelSerializer):
     def get_following_list(self, obj):
         queryset = Followship.objects.filter(follower=obj)
         return [followship.following.username for followship in queryset]
+
+    def get_cards_made_by_user(self, obj):
+        queryset = Card.objects.filter(created_by=obj)
+        # return [(card.title_text, card.id) for card in queryset]
+        return [{"card_id": card.id, "title_text": card.title_text} for card in queryset]
+
+

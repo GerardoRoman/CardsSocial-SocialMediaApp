@@ -155,7 +155,7 @@ A suggested list of endpoints and what they should do are listed below:
 
 ___
 
-## 🌶️ Spicy Features
+## 🌶️ Spicy Features 
 
 The minimum set of features is required, but you might consider adding other features. You should go for it if you have time! Some ideas:
 

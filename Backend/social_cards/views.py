@@ -44,9 +44,9 @@ class CardDetail(generics.RetrieveAPIView):
 class CardSearch(generics.ListAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    # authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
-    filter_backends = [filters.SearchFilter]
+    # filter_backends = [filters.SearchFilter]
     search_fields = [
         'card_front_message',
         'card_back_message',
@@ -71,3 +71,20 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     # authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+
+class UserCardsCreated(generics.ListAPIView):
+    serializer_class = CardSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Card.objects.filter(created_by=user)
