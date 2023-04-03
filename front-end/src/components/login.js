@@ -6,6 +6,7 @@ const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [key, setKey] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -18,9 +19,27 @@ const Login = ({ setAuth }) => {
             username: username,
             password: password
         }).then(res => {
-            setAuth(res.data.auth_token, username)
+            const token = res.data.auth_token;
+            axios.get(`https://social-cards-app.onrender.com/auth/token/login/`,
+                {
+                    headers: { Authorization: `Token ${token}` }
+                }
+            ).then((res) => {
+                setKey(username, token);
+                console.log(res.data);
+                // navigate("/profile");
+            })
+                .catch((e) => {
+                    setLoading(false);
+                    setError(e.message);
+                });
         })
-    }
+            .catch((e) => {
+                setLoading(false);
+                setError(e.message);
+            });
+    };
+
 
     return (
         <>
