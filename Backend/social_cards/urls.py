@@ -8,4 +8,7 @@ urlpatterns = [
     path('cards/search/', views.CardSearch.as_view(), name='card-search'),
     path('cards/create/', views.CardCreate.as_view(), name='card-create'),
     path('users/', views.UserList.as_view(), name="users"),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
+    path('users/my-cards/', views.UserCardsCreated.as_view(),
+         name='user-cards-created'),
 ]

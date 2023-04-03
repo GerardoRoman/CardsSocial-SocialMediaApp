@@ -30,24 +30,25 @@ def api_root(request, format=None):
 class CardList(generics.ListAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class CardDetail(generics.RetrieveAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class CardSearch(generics.ListAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = [
+        'title_text',
         'card_front_message',
         'card_back_message',
         'color',
@@ -59,8 +60,8 @@ class CardSearch(generics.ListAPIView):
 class CardCreate(generics.CreateAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
@@ -69,5 +70,22 @@ class CardCreate(generics.CreateAPIView):
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class UserCardsCreated(generics.ListAPIView):
+    serializer_class = CardSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Card.objects.filter(created_by=user)
