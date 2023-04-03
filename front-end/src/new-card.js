@@ -120,7 +120,10 @@ function NewCard(){
     })
     .catch(function (error) {
         console.log(error);
-    });}
+    })
+    setDisabled(true)
+    setEnabled(false)
+    ;}
     
     function backgroundChoice(colors) {
         console.log('clicked')
