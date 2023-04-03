@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components'
 
-export default function Cards() {
+export default function Cards({cardNumber}) {
     const [cardChoice, setCardChoice] = useState(0)
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
@@ -10,7 +10,7 @@ export default function Cards() {
 
     
     useEffect(() => {
-        axios.get("https://social-cards-app.onrender.com/cards/2", {
+        axios.get(`https://social-cards-app.onrender.com/cards/${cardNumber}`, {
             headers: {
                 'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
                 }

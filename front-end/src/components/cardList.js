@@ -138,7 +138,6 @@ export default function CardList() {
     
     function openCard() {
         console.log('clicked"');
-        <Cards/> 
     }
 
     return(
