@@ -1,4 +1,3 @@
-import App from "../App";
 import { useState } from 'react';
 
 // username component
