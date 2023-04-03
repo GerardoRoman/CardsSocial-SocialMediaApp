@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import NewCard from '../new-card';
+import Cards from './cards.js'
+
 
 
 export default function CardList() {
@@ -63,35 +66,35 @@ export default function CardList() {
         setCardList(value => value -= 1)
     }
 
-    const StyledTextArea = styled.textarea`
-        background-color: rgba(0, 0, 0, 0);
-        border-color: rgba(0, 0, 0, 0);
-        overflow: auto;
-        outline: none;
-        // border: 1px solid black;
-        width: 75%;
-        height: 23rem;
-        rows: "33";
-        cols: "50";
-        resize: none;
-        font-family: ${font};
-        font-size: 25px;
-    `
-    const StyledBackArea = styled.textarea`
-        background-color: rgba(0, 0, 0, 0);
-        border-color: rgba(0, 0, 0, 0);
-        outline: none;
-        // border: 1px solid black;
-        width: 75%;
-        height: 23rem;
-        rows: "33";
-        cols: "50";
-        resize: none;
-        font-family: ${font};
-        font-size: 30px;
-        text-align: center;
-        margin-top: 30%        
-    `
+    // const StyledTextArea = styled.textarea`
+    //     background-color: rgba(0, 0, 0, 0);
+    //     border-color: rgba(0, 0, 0, 0);
+    //     overflow: auto;
+    //     outline: none;
+    //     // border: 1px solid black;
+    //     width: 75%;
+    //     height: 23rem;
+    //     rows: "33";
+    //     cols: "50";
+    //     resize: none;
+    //     font-family: ${font};
+    //     font-size: 25px;
+    // `
+    // const StyledBackArea = styled.textarea`
+    //     background-color: rgba(0, 0, 0, 0);
+    //     border-color: rgba(0, 0, 0, 0);
+    //     outline: none;
+    //     // border: 1px solid black;
+    //     width: 75%;
+    //     height: 23rem;
+    //     rows: "33";
+    //     cols: "50";
+    //     resize: none;
+    //     font-family: ${font};
+    //     font-size: 30px;
+    //     text-align: center;
+    //     margin-top: 30%        
+    // `
 
 
     const TitleBox = styled.p`
@@ -107,7 +110,7 @@ export default function CardList() {
     resize: none;
     text-align: center;
     // border-bottom: 2px solid black
-    margin-top: 3px;
+    margin-top: 30%;
     `
 
     const BackgroundColor = styled.section`
@@ -133,41 +136,30 @@ export default function CardList() {
     console.log(cardList.color)
     console.log(cardList.font)
     
+    function openCard() {
+        console.log('clicked"');
+        <Cards/> 
+    }
+
     return(
         <>
     <h1>Card Feed</h1>
     <div className='card-container'>
     <div className='card'>
-        <h1>FRONT</h1>
-    <BackgroundColor> 
-        <BorderChoice>  
-            <FontChoice>      
-    <div> 
-        <TitleBox placeholder='Title' id='title' name='title' >{cardList.title_text}</TitleBox>
-            <div className='card-body'>
-                <StyledTextArea placeholder='Roses are red...' id='body' name='body'>{cardList.card_front_message}</StyledTextArea>              
-        </div>
-    </div>
-            </FontChoice> 
-        </BorderChoice>
-    </BackgroundColor>
-    </div>
-
-    <div className='card'>
-        <h1>BACK</h1>
-    <BackgroundColor> 
-        <BorderChoice>  
-            <FontChoice>      
-    <div> 
-            <div className='card-back'>
-                <StyledBackArea placeholder='Sign here' id='back' name='back'>{cardList.card_back_message}</StyledBackArea>              
-        </div>
-    </div>
-            </FontChoice> 
-        </BorderChoice>
-    </BackgroundColor>
-    </div>
-</div>
+                <h1>COVER</h1>
+            <BackgroundColor> 
+                <BorderChoice>  
+                    <FontChoice>      
+            <div> 
+                    <div className='card-back'>
+                    <TitleBox placeholder='Title' id='title' name='title'>{cardList.title_text}</TitleBox>                
+                    </div>
+            </div>
+                    </FontChoice> 
+                </BorderChoice>
+            </BackgroundColor>
+            </div>
+            </div>
 <br/>
 <br/>
         <p className='created-by'>
@@ -177,6 +169,9 @@ export default function CardList() {
         <div className='navigate-cards'>
             <button onClick={previousCard}>Previous Card</button>
             <button onClick={nextCard}>Next Card</button>
+        </div>
+        <div className='navigate-cards'>
+            <button onClick={openCard}>Open Card</button>
         </div>
     </>
     )
