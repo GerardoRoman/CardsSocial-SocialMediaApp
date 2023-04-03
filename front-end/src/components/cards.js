@@ -2,19 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components'
 
-// need to connect it to values of the colors/border/font
-// on click flip back function 
 export default function Cards() {
     const [cardChoice, setCardChoice] = useState(0)
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
-    // const Title = useRef('')
-    // const Body = useRef('');
-    // const Back = useRef('')
-    // const colorChoices = ['Blue', 'Red', 'Green'];
-    // const borderChoices = ['Dotted', 'Dashed', 'Solid'];
-    // const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
+
     
     useEffect(() => {
         axios.get("https://social-cards-app.onrender.com/cards/1", {

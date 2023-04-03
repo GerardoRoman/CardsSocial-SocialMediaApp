@@ -22,12 +22,11 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <CardList />
+      {/* <Navbar />
       <NewCard />
-      
-       {/* <Cards />
-      {/* {<CardList />
-      <Profile />} */}
+        <Cards />
+      <Profile /> */}
     </>
   );
 }
