@@ -1,36 +1,44 @@
-## 🐌 https://social-cards-app.onrender.com/ 
+## 🐌  https://social-cards-app.onrender.com/ 
 
 Description: Base url for the API
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🐺 /cards/
+
+## 🐺  /cards/
 
 Description: Retrieves a list of all cards in the API.
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🐸 /cards/:id/
+
+## 🐸  /cards/:id/
 
 Description: Retreves data for card with specified id 
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🐠 /cards/search/
+
+## 🐠  /cards/search/
 
 Description: Search cards based on these fields: messages, font, color, border
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🪲 /cards/create/
+
+## 🪲  /cards/create/
 
 Description: Creates a new card 
 
@@ -38,6 +46,7 @@ Description: Creates a new card
 - Content-Type: application/json
 
 Example POST:
+```
 {
 	"title_text": "how are you?",
 	"card_front_message": "how are you? haven't seen you in a while",
@@ -46,8 +55,9 @@ Example POST:
 	"border": "dashed",
 	"font": "times new roman"
 }
-
+```
 Stored As:
+```
 {
     "id": 9,
     "created_by": "victor",
@@ -59,33 +69,41 @@ Stored As:
     "border": "dashed",
     "font": "times new roman"
 }
+```
+___
 
 
-## 🐝 /users/
+## 🐝  /users/
 
 Description: List out all users
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🌿 /users/:id/
+
+## 🌿  /users/:id/
 
 Description: Retreves data for user with specified id 
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🐬 users/my-cards/
+
+## 🐬  users/my-cards/
 
 Description: List of cards you(the logged in user) have created
 
 - Allowed Request: GET
 - Content-Type: application/json
 
+___
 
-## 🐏 /auth/users/
+
+## 🐏  /auth/users/
 
 Description: Creates a new user if POST request, see list of authorized users if GET request
 
@@ -93,21 +111,26 @@ Description: Creates a new user if POST request, see list of authorized users if
 - Content-Type: application/json
 
 Example POST:
+```
 {
     "email": "bugsnacks@gmail.com",
 	"username": "littlecowboy",
 	"password": "toad4life"
 }
-
+```
 Stored As:
+```
 {
     "email": "bugsnacks@gmail.com",
     "id": 10,
     "username": "littlecowboy"
 }
+```
+___
 
 
-## 🌸 /auth/token/login/
+
+## 🌸  /auth/token/login/
 
 Description: User login (user gets token, expires after certain amount of time)
 
@@ -115,13 +138,17 @@ Description: User login (user gets token, expires after certain amount of time)
 - Content-Type: application/json
 
 Example POST:
+```
 {
     "password": "quetzalcoatlus",
     "username": "ivar"
 }
+```
+
+___
 
 
-## 🐓 /auth/token/logout/
+## 🐓  /auth/token/logout/
 
 Description: User logs out and token is destroyed
 
