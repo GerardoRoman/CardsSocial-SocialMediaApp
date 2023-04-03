@@ -29,15 +29,8 @@ const Login = ({ setAuth }) => {
                 console.log(res.data);
                 // navigate("/profile");
             })
-                .catch((e) => {
-                    setLoading(false);
-                    setError(e.message);
-                });
+            // .catch((e) => {
         })
-            .catch((e) => {
-                setLoading(false);
-                setError(e.message);
-            });
     };
 
 
