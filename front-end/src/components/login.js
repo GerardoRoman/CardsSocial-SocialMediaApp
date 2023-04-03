@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import Error from './error.js'
 
@@ -13,7 +13,7 @@ const Login = ({ setAuth }) => {
         console.log(username)
         console.log(password)
         // ADD URL FROM DJOSER
-        axios.post('', {
+        axios.post('https://social-cards-app.onrender.com/token/login/', {
             // CHANGE- HARD CODING IT FOR NOW
             username: username,
             password: password
