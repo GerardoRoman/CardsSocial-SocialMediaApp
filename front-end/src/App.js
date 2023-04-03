@@ -23,7 +23,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <NewCard />
+      <Routes>
+        <Route path='/' element= {<CardList />} />
+      </Routes>
       {/* <Cards />
       <CardList />
       <Profile />  */}
