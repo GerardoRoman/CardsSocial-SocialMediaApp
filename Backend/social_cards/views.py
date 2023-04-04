@@ -129,3 +129,15 @@ class FollowUser(generics.CreateAPIView):
     def perform_create(self, serializer):
         follower = self.request.user
         serializer.save(follower=follower)
+
+
+# class UnfollowUser(generics.DestroyAPIView):
+#     ''' unfollow another user
+#     '''
+#     serializer_class = FollowshipSerializer
+#     queryset = Followship.objects.all()
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def perform_destroy(self, instance):
+#         instance.delete()

@@ -27,6 +27,20 @@ Description: Retreves data for card with specified id
 - Allowed Request: GET
 - Content-Type: application/json
 
+Stored As:
+```
+{
+    "id": 12,
+    "created_by": "sterling",
+    "title_text": "hi",
+    "card_front_message": "how are you?",
+    "card_back_message": "miss you",
+    "created_at": "2023-04-04T14:16:55.131376Z",
+    "color": "red",
+    "border": "dotted",
+    "font": "times new roman"
+}
+```
 ___
 
 
@@ -85,6 +99,34 @@ Description: Retreves data for user with specified id
 
 - Allowed Request: GET
 - Content-Type: application/json
+
+Stored As:
+```
+{
+	"id": 8,
+	"username": "ivar",
+	"cards_created": [
+		{
+			"card_id": 7,
+			"title_text": "Gift for you!"
+		},
+		{
+			"card_id": 8,
+			"title_text": "Merry Christmas!"
+		}
+	],
+	"followers": [
+        "superuser",
+        "snail"
+    ],
+	"following": [
+		"cleo",
+		"victor",
+		"sterling",
+		"quetzal"
+	]
+}
+```
 
 ___
 
