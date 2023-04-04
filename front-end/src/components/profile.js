@@ -11,3 +11,5 @@ export default function Profile(username, token) {
         </>
     )
 }
+// ternary that set followers to follow/ unfollow based on if 
+// the profile being viewed is the users or not
