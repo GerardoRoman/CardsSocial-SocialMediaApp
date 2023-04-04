@@ -39,5 +39,3 @@ class UserSerializer(serializers.ModelSerializer):
         queryset = Card.objects.filter(created_by=obj)
         # return [(card.title_text, card.id) for card in queryset]
         return [{"card_id": card.id, "title_text": card.title_text} for card in queryset]
-
-

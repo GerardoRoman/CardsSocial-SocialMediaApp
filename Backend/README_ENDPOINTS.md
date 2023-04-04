@@ -70,6 +70,7 @@ Stored As:
     "font": "times new roman"
 }
 ```
+
 ___
 
 
@@ -84,14 +85,27 @@ Description: Retreves data for user with specified id
 ___
 
 
+
 ## 🐬  users/my-cards/
 
-Description: List of cards you(the logged in user) have created
+Description: List of cards you (the logged in user) have created
 
 - Allowed Request: GET
 - Content-Type: application/json
 
 ___
+
+
+
+## 🦄   users/my-cards/:id/
+
+Description: Detail view of card the logged in user had made, can EDIT or DELETE card
+
+- Allowed Request: GET, PUT, PATCH, DELETE
+- Content-Type: application/json
+
+___
+
 
 
 ## 🐝   /auth/users/
