@@ -8,6 +8,7 @@ Description: Base url for the API
 ___
 
 
+
 ## 🐺  /cards/
 
 Description: Retrieves a list of all cards in the API.
@@ -16,6 +17,7 @@ Description: Retrieves a list of all cards in the API.
 - Content-Type: application/json
 
 ___
+
 
 
 ## 🐸  /cards/:id/
@@ -28,6 +30,7 @@ Description: Retreves data for card with specified id
 ___
 
 
+
 ## 🐠  /cards/search/
 
 Description: Search cards based on these fields: messages, font, color, border
@@ -36,6 +39,7 @@ Description: Search cards based on these fields: messages, font, color, border
 - Content-Type: application/json
 
 ___
+
 
 
 ## 🪲  /cards/create/
@@ -108,6 +112,36 @@ ___
 
 
 
+## 🦖   users/follow/
+
+Description: Follow another user
+
+- Allowed Request: POST
+- Content-Type: application/json
+
+`follower` = person logged in (pk)
+
+`following` = person logged in user wants to follow (pk)
+
+Example POST:
+```
+{
+	"following": "2"
+}
+```
+Stored As:
+```
+{
+	"id": 36,
+	"following": 2,
+	"follower": 8
+}
+```
+
+___
+
+
+
 ## 🐝   /auth/users/
 
 Description: Creates a new user if POST request, see list of authorized users if GET request
@@ -131,6 +165,7 @@ Stored As:
     "username": "littlecowboy"
 }
 ```
+
 ___
 
 
@@ -151,6 +186,7 @@ Example POST:
 ```
 
 ___
+
 
 
 ## 🐓  /auth/token/logout/

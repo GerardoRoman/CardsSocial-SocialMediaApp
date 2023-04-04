@@ -41,8 +41,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FollowshipSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Followship
         fields = (
             '__all__'
         )
+        read_only_fields = ("follower",)

@@ -1,6 +1,6 @@
 from .models import Followship, User
 from rest_framework.views import APIView
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import api_view
@@ -118,14 +118,14 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
         return Card.objects.filter(created_by=user)
 
 
-# class FollowUser(generics.CreateAPIView):
-#     ''' follow another user
-#     '''
-#     serializer_class = FollowshipSerializer
-#     authentication_classes = [TokenAuthentication]
-#     permission_classes = [IsAuthenticated]
+class FollowUser(generics.CreateAPIView):
+    ''' follow another user
+    '''
+    serializer_class = FollowshipSerializer
+    queryset = Followship.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-#     def post(self, request, *args, **kwargs):
-#         follower = self.request.user
-#         # code for getting **kwarg for username of person you want to follow
-#         return self.create(request, *args, **kwargs)
+    def perform_create(self, serializer):
+        follower = self.request.user
+        serializer.save(follower=follower)
