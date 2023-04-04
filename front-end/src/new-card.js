@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components'
-import axios from 'axios'
+import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -9,15 +10,13 @@ function NewCard(){
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
-    const Title = useRef('')
-    const Body = useRef('');
-    const Back = useRef('');
+    const title = useRef('')
+    const body = useRef('');
+    const back = useRef('');
     const colorChoices = ['Blue', 'Red', 'Green'];
     const borderChoices = ['Dotted', 'Dashed', 'Solid'];
     const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
-    const [resultsObject, setResultsObject] = useState([]);
-    const [disabled, setDisabled] = useState(true)
-    const [enabled, setEnabled] = useState(false)
+    const navigate = useNavigate()
 
     const StyledTextArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
@@ -48,22 +47,6 @@ function NewCard(){
         text-align: center;
         margin-top: 30%        
     `
-    // const StyledCoverArea = styled.textarea`
-    //     background-color: rgba(0, 0, 0, 0);
-    //     border-color: rgba(0, 0, 0, 0);
-    //     outline: none;
-    //     // border: 1px solid black;
-    //     width: 75%;
-    //     height: 23rem;
-    //     rows: "33";
-    //     cols: "50";
-    //     resize: none;
-    //     font-family: ${font};
-    //     font-size: 30px;
-    //     text-align: center;
-    //     margin-top: 30%        
-    // `
-
 
     const TitleBox = styled.input`
     background-color: rgba(0, 0, 0, 0);
@@ -102,46 +85,42 @@ function NewCard(){
         console.log('useEffect runs')
     })
 
-    function handleSubmit(event) {
-        event.preventDefault();
-    console.log('Background Color: ', background);
-    console.log('Border Selection: ', border);
-    console.log('Font Selection: ', font);
-    console.log('Title Text: ', Title.current.value)
-    console.log('Body Text: ', Body.current.value);
-    console.log('Back Text: ', Back.current.value);
-    setResultsObject({
-        title_text: Title.current.value,
-        card_front_message: Body.current.value,
-        card_back_message: Back.current.value,
-        color: background,
-        border: border,
-        font: font,
-    })
-    setDisabled(false)
-    setEnabled(true)
-    }
-
-    console.log(resultsObject)
-
-    function handlePost(){
+    function handlePost(resultsObject){
     axios.post('https://social-cards-app.onrender.com/cards/create/', 
         resultsObject,
     {   
         headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `${token}`
+        'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
         }
     })
     .then(function(response){
         console.log(response);
+        navigate("/")
     })
     .catch(function (error) {
         console.log(error);
     })
-    setDisabled(true)
-    setEnabled(false)
     ;}
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    console.log('Background Color: ', background);
+    console.log('Border Selection: ', border);
+    console.log('Font Selection: ', font);
+    console.log('Title Text: ', title.current.value)
+    console.log('Body Text: ', body.current.value);
+    console.log('Back Text: ', back.current.value);
+    const resultsObject = {
+        title_text: title.current.value,
+        card_front_message: body.current.value,
+        card_back_message: back.current.value,
+        color: background,
+        border: border,
+        font: font,
+    }
+    handlePost(resultsObject)
+    }
     
     function backgroundChoice(colors) {
         console.log('clicked')
@@ -211,7 +190,7 @@ function NewCard(){
                     <FontChoice>      
             <div> 
                     <div className='card-back'>
-                    <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>                </div>
+                    <TitleBox placeholder='Title' id='title' name='title' ref={title}></TitleBox>                </div>
             </div>
                     </FontChoice> 
                 </BorderChoice>
@@ -223,13 +202,13 @@ function NewCard(){
         <br />
         <div className='card-container'>
             <div className='card'>
-                <h1>FRONT</h1>
+                <h1>Inside Left</h1>
             <BackgroundColor> 
                 <BorderChoice>  
                     <FontChoice>      
             <div> 
                     <div className='card-body'>
-                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={Body}></StyledTextArea>              
+                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={body}></StyledTextArea>              
                 </div>
             </div>
                     </FontChoice> 
@@ -238,13 +217,13 @@ function NewCard(){
             </div>
 
             <div className='card'>
-                <h1>BACK</h1>
+                <h1>Inside Right</h1>
             <BackgroundColor> 
                 <BorderChoice>  
                     <FontChoice>      
             <div> 
                     <div className='card-back'>
-                        <StyledBackArea placeholder='Sign here' id='back' name='back' ref={Back}></StyledBackArea>              
+                        <StyledBackArea placeholder='Sign here' id='back' name='back' ref={back}></StyledBackArea>              
                 </div>
             </div>
                     </FontChoice> 
@@ -270,19 +249,18 @@ function NewCard(){
             </div>
             <div>
                 <label for='body-text'></label>
-                <input value={Body.current} hidden={true}/>
+                <input ref={body} hidden={true}/>
             </div>
             <div>
                 <label for='title-text'></label>
-                <input value={Title.current} hidden={true}/>
+                <input ref={title} hidden={true}/>
             </div>
             <div>
             <label for='back-text'></label>
-                <input value={Back.current} hidden />
+                <input ref={back} hidden />
             </div>
             <div className='submit'>
-            <button type='submit' readOnly={true} disabled={enabled}>Set Card</button>
-            <button onClick={handlePost} disabled={disabled}>POST</button>
+            <button type='submit'>Submit</button>
             </div>
         </form>
         </>
