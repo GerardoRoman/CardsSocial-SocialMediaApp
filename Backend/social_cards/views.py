@@ -12,7 +12,7 @@ from rest_framework.authentication import TokenAuthentication
 
 
 from .models import User, Card
-from .serializers import CardSerializer, UserSerializer
+from .serializers import CardSerializer, UserSerializer, FollowshipSerializer
 
 
 @api_view(["GET"])
@@ -116,3 +116,16 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return Card.objects.filter(created_by=user)
+
+
+# class FollowUser(generics.CreateAPIView):
+#     ''' follow another user
+#     '''
+#     serializer_class = FollowshipSerializer
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request, *args, **kwargs):
+#         follower = self.request.user
+#         # code for getting **kwarg for username of person you want to follow
+#         return self.create(request, *args, **kwargs)
