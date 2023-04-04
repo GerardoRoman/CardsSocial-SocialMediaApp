@@ -11,7 +11,7 @@ function NewCard(){
     const [font, setFont] = useState(null);
     const Title = useRef('')
     const Body = useRef('');
-    const Back = useRef('')
+    const Back = useRef('');
     const colorChoices = ['Blue', 'Red', 'Green'];
     const borderChoices = ['Dotted', 'Dashed', 'Solid'];
     const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
@@ -48,6 +48,21 @@ function NewCard(){
         text-align: center;
         margin-top: 30%        
     `
+    // const StyledCoverArea = styled.textarea`
+    //     background-color: rgba(0, 0, 0, 0);
+    //     border-color: rgba(0, 0, 0, 0);
+    //     outline: none;
+    //     // border: 1px solid black;
+    //     width: 75%;
+    //     height: 23rem;
+    //     rows: "33";
+    //     cols: "50";
+    //     resize: none;
+    //     font-family: ${font};
+    //     font-size: 30px;
+    //     text-align: center;
+    //     margin-top: 30%        
+    // `
 
 
     const TitleBox = styled.input`
@@ -63,7 +78,7 @@ function NewCard(){
     resize: none;
     text-align: center;
     // border-bottom: 2px solid black
-    margin-top: 3px;
+    margin-top: 30%;
     `
 
     const BackgroundColor = styled.section`
@@ -189,6 +204,22 @@ function NewCard(){
         </span>   
         
         </div>
+        <div className='card'>
+                <h1>COVER</h1>
+            <BackgroundColor> 
+                <BorderChoice>  
+                    <FontChoice>      
+            <div> 
+                    <div className='card-back'>
+                    <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>                </div>
+            </div>
+                    </FontChoice> 
+                </BorderChoice>
+            </BackgroundColor>
+            </div>
+        <br />
+        <br />
+        <br />
         <br />
         <div className='card-container'>
             <div className='card'>
@@ -197,7 +228,6 @@ function NewCard(){
                 <BorderChoice>  
                     <FontChoice>      
             <div> 
-                <TitleBox placeholder='Title' id='title' name='title' ref={Title}></TitleBox>
                     <div className='card-body'>
                         <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={Body}></StyledTextArea>              
                 </div>

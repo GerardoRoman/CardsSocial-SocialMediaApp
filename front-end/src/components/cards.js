@@ -2,22 +2,15 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components'
 
-// need to connect it to values of the colors/border/font
-// on click flip back function 
-export default function Cards() {
+export default function Cards({cardNumber}) {
     const [cardChoice, setCardChoice] = useState(0)
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
-    // const Title = useRef('')
-    // const Body = useRef('');
-    // const Back = useRef('')
-    // const colorChoices = ['Blue', 'Red', 'Green'];
-    // const borderChoices = ['Dotted', 'Dashed', 'Solid'];
-    // const fontChoices = ['Handwritten', 'Plain', 'Cursive'];
+
     
     useEffect(() => {
-        axios.get("https://social-cards-app.onrender.com/cards/1", {
+        axios.get(`https://social-cards-app.onrender.com/cards/${cardNumber}`, {
             headers: {
                 'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
                 }
@@ -87,21 +80,21 @@ export default function Cards() {
     `
 
 
-    const TitleBox = styled.p`
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
-    overflow: auto;
-    outline: none;
-    // border: 1px solid black;
-    width: 100%;
-    height: 3rem;
-    font-family: ${font};
-    font-size: 30px;
-    resize: none;
-    text-align: center;
-    // border-bottom: 2px solid black
-    margin-top: 3px;
-    `
+    // const TitleBox = styled.p`
+    // background-color: rgba(0, 0, 0, 0);
+    // border-color: rgba(0, 0, 0, 0);
+    // overflow: auto;
+    // outline: none;
+    // // border: 1px solid black;
+    // width: 100%;
+    // height: 3rem;
+    // font-family: ${font};
+    // font-size: 30px;
+    // resize: none;
+    // text-align: center;
+    // // border-bottom: 2px solid black
+    // margin-top: 3px;
+    // `
 
     const BackgroundColor = styled.section`
         background: ${background};
@@ -136,7 +129,6 @@ export default function Cards() {
         <BorderChoice>  
             <FontChoice>      
     <div> 
-        <TitleBox placeholder='Title' id='title' name='title' >{cardChoice.title_text}</TitleBox>
             <div className='card-body'>
                 <StyledTextArea placeholder='Roses are red...' id='body' name='body'>{cardChoice.card_front_message}</StyledTextArea>              
         </div>

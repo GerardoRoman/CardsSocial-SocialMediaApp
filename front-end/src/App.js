@@ -23,11 +23,17 @@ function App() {
   return (
     <>
       <Navbar />
-      <NewCard />
-      
-       {/* <Cards />
-      {/* {<CardList />
-      <Profile />} */}
+      <Routes>
+        <Route path='/' element= {<CardList />} />
+        <Route path='/new' element= {<NewCard />} />
+        <Route path='/profile' element= {<Profile />} />
+        {/* <Route path='/cardview' element= {<Cards />} /> */}
+        {/* <Route path='/login' element= {<LogIn />} />
+        <Route path='/logout' element= {<LogOut />} /> */}
+      </Routes>
+      {/* <Cards />
+      <CardList />
+      <Profile />  */}
     </>
   );
 }
