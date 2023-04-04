@@ -27,6 +27,10 @@ h1 {
     text-align: center;
 }
 
+h4 {
+    text-align: center;
+}
+
 .customize-buttons {
     /* border: 1px solid black; */
     display: flex;
@@ -52,5 +56,8 @@ h1 {
     text-align: center;
 }
 
+.login-form {
+    text-align: center;
+}
 
 
