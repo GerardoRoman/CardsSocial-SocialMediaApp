@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
-
-export default function Profile(username, token) {
+import Avatar from './profile-icon.js'
+export default function Profile() {
 
     return (
         <>
-            <div> username </div>
+        <Avatar />
             <div> follow/unfollow button </div>
             <div> CARDS </div>
         </>
