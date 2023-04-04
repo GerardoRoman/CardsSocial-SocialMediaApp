@@ -48,22 +48,6 @@ function NewCard(){
         text-align: center;
         margin-top: 30%        
     `
-    // const StyledCoverArea = styled.textarea`
-    //     background-color: rgba(0, 0, 0, 0);
-    //     border-color: rgba(0, 0, 0, 0);
-    //     outline: none;
-    //     // border: 1px solid black;
-    //     width: 75%;
-    //     height: 23rem;
-    //     rows: "33";
-    //     cols: "50";
-    //     resize: none;
-    //     font-family: ${font};
-    //     font-size: 30px;
-    //     text-align: center;
-    //     margin-top: 30%        
-    // `
-
 
     const TitleBox = styled.input`
     background-color: rgba(0, 0, 0, 0);
@@ -130,7 +114,7 @@ function NewCard(){
     {   
         headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `${token}`
+        'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
         }
     })
     .then(function(response){

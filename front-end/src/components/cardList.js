@@ -25,33 +25,6 @@ export default function CardList() {
             setCardList(response.data.results)
         })
 
-        if (cardList.color === 'blue'){
-            setBackground('aqua')
-        }
-        if (cardList.color === 'red'){
-            setBackground('lightcoral')
-        }
-        if (cardList.color === 'green'){
-            setBackground('lightgreen')
-        } 
-        if (cardList.border === 'dotted'){
-            setBorder('dotted')
-        }
-        if (cardList.border === 'dashed'){
-            setBorder('dashed')
-        }
-        if (cardList.border === 'solid'){
-            setBorder('solid')
-        } 
-        if (cardList.font === 'delicious handrawn'){
-            setFont('Delicious Handrawn')
-        }
-        if (cardList.font === 'playfair display') {
-            setFont('Playfair Display')
-        }
-        if (cardList.font === 'dancing script') {
-            setFont('Dancing Script')
-        }
         setCardNumber(cardList.id)
         console.log(cardNumber)
         
@@ -96,11 +69,6 @@ export default function CardList() {
     console.log(cardList.color)
     console.log(cardList.font)
     
-    function openCard() {
-        console.log('clicked"');
-        <Navigate to="/cardview/"/>;
-    }
-
     return (cardList.length) > 0 && (
         <>
     <h1>Card Feed</h1>
@@ -122,14 +90,13 @@ export default function CardList() {
             </BackgroundColor>
             </div>
             </div>
+            <br/>
         <p className='created-by'>
     Created By: {card.created_by}
+        <div className='navigate-cards'>
+            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+        </div>
         </p>
-        <div className='navigate-cards'>
-        </div>
-        <div className='navigate-cards'>
-            <button onClick={openCard} >Open Card</button>
-        </div>
         <br/>
         <br/>
         <br/>
