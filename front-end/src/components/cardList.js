@@ -76,7 +76,7 @@ export default function CardList() {
     <>
     <div className='card-container'>
     <div className='card'>
-                <h1>COVER</h1>
+                <h4>COVER</h4>
             <BackgroundColor background={card.color}> 
                 <BorderChoice border={card.border}>  
                     <FontChoice font={card.font}>      
