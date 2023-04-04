@@ -29,11 +29,12 @@ function App() {
       {loggedIn ? (
         <Routes>
           <Route path='/Profile' element={<Profile username={username} token={token} />} />
-          {/* <Registration /> */}
-          {/* <CardList /> */}
-          {/* <Navbar /> */}
-          {/* <Cards /> */}
-          {/* <NewCard /> */}
+          <Route path='/' element={<CardList />} />
+          <Route path='/new' element={<NewCard />} />
+          <Route path='/profile' element={<Profile />} />
+          {/* <Route path='/cardview' element= {<Cards />} /> */}
+          {/* <Route path='/login' element= {<LogIn />} />
+        <Route path='/logout' element= {<LogOut />} /> */}
         </Routes>
       ) : (
         <div>
