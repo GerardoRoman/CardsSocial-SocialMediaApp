@@ -73,15 +73,6 @@ Stored As:
 ___
 
 
-## 🐝  /users/
-
-Description: List out all users
-
-- Allowed Request: GET
-- Content-Type: application/json
-
-___
-
 
 ## 🌿  /users/:id/
 
@@ -103,7 +94,7 @@ Description: List of cards you(the logged in user) have created
 ___
 
 
-## 🐏  /auth/users/
+## 🐝   /auth/users/
 
 Description: Creates a new user if POST request, see list of authorized users if GET request
 
