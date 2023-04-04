@@ -80,7 +80,7 @@ export default function Cards() {
     <h1>Card View</h1>
     <div className='card-container'>
     <div className='card'>
-        <h1>FRONT</h1>
+        <h1>Inside Left</h1>
     <BackgroundColor> 
         <BorderChoice>  
             <FontChoice>      
@@ -95,7 +95,7 @@ export default function Cards() {
     </div>
 
     <div className='card'>
-        <h1>BACK</h1>
+        <h1>Inside Right</h1>
     <BackgroundColor> 
         <BorderChoice>  
             <FontChoice>      

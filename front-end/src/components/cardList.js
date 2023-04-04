@@ -28,7 +28,7 @@ export default function CardList() {
         setCardNumber(cardList.id)
         console.log(cardNumber)
         
-    }, [cardList.color, cardList.border, cardList.font, cardNumber])
+    }, [])
 
     const TitleBox = styled.p`
     background-color: rgba(0, 0, 0, 0);
