@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-export default function Profile() {
+export default function Profile(username, token) {
 
     return (
         <>
