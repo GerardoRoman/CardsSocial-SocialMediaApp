@@ -55,3 +55,5 @@ const Registration = ({ setAuth }) => {
 
     }
 }
+
+export default Registration

@@ -6,7 +6,7 @@ import { useState } from 'react';
 // cards component
 // nav-bar component
 
-export default function Profile() {
+export default function Profile(username, token) {
 
     return (
         <>
