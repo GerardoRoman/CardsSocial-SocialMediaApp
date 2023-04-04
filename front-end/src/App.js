@@ -4,7 +4,9 @@ import NewCard from './new-card.js'
 import Cards from './components/cards.js'
 import CardList from './components/cardList.js'
 import Profile from './components/profile.js'
-import Navbar from './components/navbar'
+import Navbar from './components/navbar.js'
+import Login from './components/login.js'
+import Registration from './components/newuser.js'
 import useLocalStorageState from 'use-local-storage-state'
 import { Route, Routes } from 'react-router-dom'
 
@@ -19,22 +21,28 @@ function App() {
     setUsername(username)
   }
 
+  const loggedIn = token
 
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path='/' element= {<CardList />} />
-        <Route path='/new' element= {<NewCard />} />
-        <Route path='/profile' element= {<Profile />} />
-        <Route path='/cardview/:cardNumber' element= {<Cards />} />
-        {/* <Route path='/login' element= {<LogIn />} />
+
+      {loggedIn ? (
+        <Routes>
+          <Route path='/Profile' element={<Profile username={username} token={token} />} />
+          <Route path='/' element={<CardList />} />
+          <Route path='/new' element={<NewCard />} />
+          <Route path='/profile' element={<Profile />} />
+          {/* <Route path='/cardview' element= {<Cards />} /> */}
+          {/* <Route path='/login' element= {<LogIn />} />
         <Route path='/logout' element= {<LogOut />} /> */}
-      </Routes>
-      {/* <Cards />
-      <CardList />
-      <Profile />  */}
-    </>
+        </Routes>
+      ) : (
+        <div>
+          <Routes>
+            <Route path='/Login' element={<Login setAuth={setAuth} />} />
+          </Routes>
+        </div>)
+      }</>
   );
 }
 
