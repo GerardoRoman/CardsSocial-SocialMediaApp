@@ -25,9 +25,11 @@ function App() {
 
   return (
     <>
-<Navbar/>
       {loggedIn ? (
+        <>
+        <Navbar/>
         <Routes>
+          
           <Route path='/Profile' element={<Profile username={username} token={token} />} />
           <Route path='/' element={<CardList />} />
           <Route path='/new' element={<NewCard />} />
@@ -36,10 +38,11 @@ function App() {
           {/* <Route path='/login' element= {<LogIn />} />
         <Route path='/logout' element= {<LogOut />} /> */}
         </Routes>
+        </>
       ) : (
         <div>
           <Routes>
-            <Route path='/Login' element={<Login setAuth={setAuth} />} />
+            <Route path='/' element={loggedIn ? <CardList /> : <Login setAuth={setAuth} />} />
           </Routes>
         </div>)
       }</>
