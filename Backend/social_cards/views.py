@@ -128,9 +128,4 @@ class FollowUser(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         follower = self.request.user
-        # following = get_object_or_404(User, pk=self.kwargs["pk"])
         serializer.save(follower=follower)
-
-    # def perform_create(self, serializer):
-    #     question = get_object_or_404(Question, pk=self.kwargs["pk"])
-    #     serializer.save(author=self.request.user, question=question)

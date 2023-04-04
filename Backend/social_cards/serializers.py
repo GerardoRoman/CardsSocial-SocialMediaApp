@@ -41,6 +41,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FollowshipSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Followship
         fields = (
