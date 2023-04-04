@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import NewCard from '../new-card';
-import Cards from './cards.js'
+import Cards from './cards.js';
+import { Navigate } from "react-router-dom";
 
 
 
@@ -51,6 +52,8 @@ export default function CardList() {
         if (cardList.font === 'dancing script') {
             setFont('Dancing Script')
         }
+        setCardNumber(cardList.id)
+        console.log(cardNumber)
         
     }, [cardList.color, cardList.border, cardList.font, cardNumber])
 
@@ -77,8 +80,8 @@ export default function CardList() {
         `
     const BorderChoice = styled.section`
         border: 5px ${props => props.border} black;  
-        width: 98%;
-        height: 98%;
+        width: 97%;
+        height: 97%;
     `
 
     const FontChoice = styled.section`
@@ -95,6 +98,7 @@ export default function CardList() {
     
     function openCard() {
         console.log('clicked"');
+        <Navigate to="/cardview/"/>;
     }
 
     return (cardList.length) > 0 && (
@@ -118,15 +122,13 @@ export default function CardList() {
             </BackgroundColor>
             </div>
             </div>
-            <br/>
-            <br/>
         <p className='created-by'>
     Created By: {card.created_by}
         </p>
         <div className='navigate-cards'>
         </div>
         <div className='navigate-cards'>
-            <button onClick={openCard}>Open Card</button>
+            <button onClick={openCard} >Open Card</button>
         </div>
         <br/>
         <br/>

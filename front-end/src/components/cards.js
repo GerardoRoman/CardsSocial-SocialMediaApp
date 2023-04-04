@@ -47,7 +47,7 @@ export default function Cards({cardNumber}) {
             setFont('Dancing Script')
         }
         
-    }, [cardChoice.color, cardChoice.border, cardChoice.font])
+    }, [])
 
     const StyledTextArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
