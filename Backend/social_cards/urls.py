@@ -14,6 +14,6 @@ urlpatterns = [
     path('users/my-cards/<int:pk>/',
          views.UserCardDetail.as_view(), name='card-edit-update'),
     path('users/follow/', views.FollowUser.as_view(), name='follow-user'),
-    path('users/unfollow/',
-         views.UnfollowUser.as_view(), name='user-unfollow'),
+    #     path('users/unfollow/',
+    #          views.UnfollowUser.as_view(), name='user-unfollow'),
 ]
