@@ -33,6 +33,7 @@ const Login = ({ setAuth }) => {
     return (
         <>
             <h1>Log In</h1>
+            <div className='login-form'> 
             <form onFocus={() => setError(null)} onSubmit={handleSubmit}>
                 <div>
                     <label> <span>username</span></label>
@@ -62,6 +63,7 @@ const Login = ({ setAuth }) => {
                     <button type='submit'>Submit!</button>
                 </div>
             </form>
+            </div>
             {error && <Error message={error.message} />}
         </>
     )
