@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-
+<Navbar/>
       {loggedIn ? (
         <Routes>
           <Route path='/Profile' element={<Profile username={username} token={token} />} />

@@ -24,7 +24,7 @@ const Login = ({ setAuth }) => {
             const token = res.data.auth_token;
             setAuth(username, token);
             console.log(res.data);
-            navigate("/profile");
+            navigate("/");
         })
         // .catch((e) => {
     };
