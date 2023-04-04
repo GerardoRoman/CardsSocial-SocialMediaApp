@@ -1,17 +1,9 @@
-// import { CgProfile } from 'react-icons/cg'
-import "../styles/profile-icon.css"
-// import { Link } from 'react-router-dom'
-
-export default function Profile({username, token}) {
+import Avatar from './profile-icon.js'
+export default function Profile() {
 
     return (
         <>
-{/* //         <Link to='/profile'>
-//         <div className='profile-icon'>
-//             <CgProfile style={{ fontSize: '32px' }} />
-//         </div>
-//         </Link>
-//             <div> {username} </div> */}
+        <Avatar />
             <div> follow/unfollow button </div>
             <div> CARDS </div>
         </>

@@ -3,13 +3,14 @@ import { useState } from 'react'
 import "../styles/navbar.css"
 import { GiLetterBomb } from 'react-icons/gi'
 
+
 function Navbar() {
     const [expanded, setExpanded] = useState(false)
 
     return ( 
         <header className='header'>
             <div>
-            <h3><a href="/">Cards Social<GiLetterBomb /></a></h3>
+            <h2><a href="/">Cards Social<GiLetterBomb /></a></h2>
             </div>
             <nav className='navbar'>
                 <div className='hamburger'>

@@ -3,3 +3,8 @@
     align-items: center;
     cursor: pointer;
 }
+
+a, u {
+    text-decoration: none;
+    color: black;
+  }
