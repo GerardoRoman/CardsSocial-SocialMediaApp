@@ -1,6 +1,7 @@
 import { FaBars } from 'react-icons/fa'
 import { useState } from 'react'
 import "../styles/navbar.css"
+import { GiLetterBomb } from 'react-icons/gi'
 
 function Navbar() {
     const [expanded, setExpanded] = useState(false)
@@ -8,7 +9,7 @@ function Navbar() {
     return ( 
         <header className='header'>
             <div>
-            <h3>Social Cards</h3>
+            <h3><a href="/">Cards Social<GiLetterBomb /></a></h3>
             </div>
             <nav className='navbar'>
                 <div className='hamburger'>

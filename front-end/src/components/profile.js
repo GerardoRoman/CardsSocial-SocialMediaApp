@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import { CgProfile } from 'react-icons/cg'
-import "../styles/navbar.css"
+// import { CgProfile } from 'react-icons/cg'
+import "../styles/profile-icon.css"
+// import { Link } from 'react-router-dom'
 
-export default function Profile(username, token) {
-    const [expanded, setExpanded] = useState(false)
+export default function Profile({username, token}) {
 
     return (
         <>
-        <button className='hamburger' onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
-            <CgProfile />
-        </button>
-            <div> username </div>
+{/* //         <Link to='/profile'>
+//         <div className='profile-icon'>
+//             <CgProfile style={{ fontSize: '32px' }} />
+//         </div>
+//         </Link>
+//             <div> {username} </div> */}
             <div> follow/unfollow button </div>
             <div> CARDS </div>
         </>
