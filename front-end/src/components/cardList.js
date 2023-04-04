@@ -14,13 +14,14 @@ export default function CardList() {
     const [cardNumber, setCardNumber] = useState(1)
     
     useEffect(() => {
-        axios.get(`https://social-cards-app.onrender.com/cards/${cardNumber}`, {
+        axios.get('https://social-cards-app.onrender.com/cards/', {
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
                 }
         }).then((response) => {
-            console.log(response.data)
-            setCardList(response.data)
+            console.log(response.data.results)
+            setCardList(response.data.results)
         })
 
         if (cardList.color === 'blue'){
@@ -52,50 +53,6 @@ export default function CardList() {
         }
         
     }, [cardList.color, cardList.border, cardList.font, cardNumber])
-    
-    function nextCard() {
-        console.log('clicked')
-        setCardNumber(e => e += 1)
-        console.log(cardNumber)
-        setCardList(value => value += 1)
-    }
-    function previousCard() {
-        console.log('clicked')
-        setCardNumber(e => e -= 1)
-        console.log(cardNumber)
-        setCardList(value => value -= 1)
-    }
-
-    // const StyledTextArea = styled.textarea`
-    //     background-color: rgba(0, 0, 0, 0);
-    //     border-color: rgba(0, 0, 0, 0);
-    //     overflow: auto;
-    //     outline: none;
-    //     // border: 1px solid black;
-    //     width: 75%;
-    //     height: 23rem;
-    //     rows: "33";
-    //     cols: "50";
-    //     resize: none;
-    //     font-family: ${font};
-    //     font-size: 25px;
-    // `
-    // const StyledBackArea = styled.textarea`
-    //     background-color: rgba(0, 0, 0, 0);
-    //     border-color: rgba(0, 0, 0, 0);
-    //     outline: none;
-    //     // border: 1px solid black;
-    //     width: 75%;
-    //     height: 23rem;
-    //     rows: "33";
-    //     cols: "50";
-    //     resize: none;
-    //     font-family: ${font};
-    //     font-size: 30px;
-    //     text-align: center;
-    //     margin-top: 30%        
-    // `
-
 
     const TitleBox = styled.p`
     background-color: rgba(0, 0, 0, 0);
@@ -105,7 +62,7 @@ export default function CardList() {
     // border: 1px solid black;
     width: 100%;
     height: 3rem;
-    font-family: ${font};
+    font-family: ${props => props.font};
     font-size: 30px;
     resize: none;
     text-align: center;
@@ -114,18 +71,18 @@ export default function CardList() {
     `
 
     const BackgroundColor = styled.section`
-        background: ${background};
+        background: ${props => props.background};
         width: 100%;
         height: 100%;
         `
     const BorderChoice = styled.section`
-        border: 5px ${border} black;  
+        border: 5px ${props => props.border} black;  
         width: 98%;
         height: 98%;
     `
 
     const FontChoice = styled.section`
-        font-family: ${font};
+        font-family: ${props => props.font};
     `
 
     console.log(cardList)
@@ -140,18 +97,20 @@ export default function CardList() {
         console.log('clicked"');
     }
 
-    return(
+    return (cardList.length) > 0 && (
         <>
     <h1>Card Feed</h1>
+    {cardList.map((card => (
+    <>
     <div className='card-container'>
     <div className='card'>
                 <h1>COVER</h1>
-            <BackgroundColor> 
-                <BorderChoice>  
-                    <FontChoice>      
+            <BackgroundColor background={card.color}> 
+                <BorderChoice border={card.border}>  
+                    <FontChoice font={card.font}>      
             <div> 
                     <div className='card-back'>
-                    <TitleBox placeholder='Title' id='title' name='title'>{cardList.title_text}</TitleBox>                
+                    <TitleBox placeholder='Title' id='title' name='title'>{card.title_text}</TitleBox>                
                     </div>
             </div>
                     </FontChoice> 
@@ -159,19 +118,21 @@ export default function CardList() {
             </BackgroundColor>
             </div>
             </div>
-<br/>
-<br/>
+            <br/>
+            <br/>
         <p className='created-by'>
-    Created By: {cardList.created_by}
+    Created By: {card.created_by}
         </p>
-        <br/>
         <div className='navigate-cards'>
-            <button onClick={previousCard}>Previous Card</button>
-            <button onClick={nextCard}>Next Card</button>
         </div>
         <div className='navigate-cards'>
             <button onClick={openCard}>Open Card</button>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        </>
+        )))}
     </>
     )
 }
