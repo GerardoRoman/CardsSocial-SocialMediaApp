@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import NewCard from '../new-card';
+import NewCard from './new-card';
 import Cards from './cards.js';
 import { Navigate } from "react-router-dom";
 

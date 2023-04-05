@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import NewCard from './new-card.js'
+import NewCard from './components/new-card.js'
 import Cards from './components/cards.js'
 import CardList from './components/cardList.js'
 import Profile from './components/profile.js'
@@ -12,6 +12,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import ViewOtherProfile from './components/view-other-profile';
 import axios from 'axios';
+import ErrorPage from './components/404';
 
 
 
@@ -60,6 +61,7 @@ function App() {
             <Route path='/profile' element={<Profile username={username} token={token} />} />
             <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
             <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
+            <Route path='/404page' element={<ErrorPage />} />
           </Routes>
         </>
       ) : (
