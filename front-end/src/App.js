@@ -37,7 +37,7 @@ function App() {
           <Route path='/new' element={<NewCard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/cardview/:cardNumber' element= {<Cards />} />
-          <Route path='/viewotherprofile/' element= {<ViewOtherProfile />} />
+          <Route path='/viewotherprofile/:currentProfile' element= {<ViewOtherProfile />} />
         </Routes>
         </>
       ) : (

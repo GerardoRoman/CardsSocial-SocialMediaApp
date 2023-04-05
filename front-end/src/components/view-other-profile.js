@@ -2,10 +2,13 @@ import Avatar from './profile-icon.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom'
 
 export default function ViewOtherProfile (username, token) {
     const [cardList, setCardList] = useState(0)
     const [cardNumber, setCardNumber] = useState(1)
+    const {currentProfile} = useParams()
+    
 
     useEffect(() => {
         axios.get('https://social-cards-app.onrender.com/cards/', {
@@ -19,8 +22,11 @@ export default function ViewOtherProfile (username, token) {
         })
         
         setCardNumber(cardList.id)
+
+        axios.get(`https://social-cards-app.onrender.com/users/${currentProfile}`)
     }, [])
 
+    console.log(currentProfile)
     console.log(cardList)
     console.log(cardNumber)
 
@@ -55,7 +61,42 @@ const FontChoice = styled.section`
         font-family: ${props => props.font};
 `
 
-    return (
-        <h1>Hi!</h1>
-    )
-}
+return (cardList.length) > 0 && (
+    <>
+    <Avatar />
+    <h1>{currentProfile}</h1>
+        <div><button>Follow</button></div>
+        <div><button>Unfollow</button></div>
+        <h4> CARDS </h4>
+        {cardList.filter(creator => creator.created_by === currentProfile).map((card => (
+<>
+<div className='card-container'>
+<div className='card'>
+            <h4>COVER</h4>
+        <BackgroundColor background={card.color}> 
+            <BorderChoice border={card.border}>  
+                <FontChoice font={card.font}>      
+        <div> 
+                <div className='card-back'>
+                <TitleBox placeholder='Title' id='title' name='title'>{card.title_text}</TitleBox>                
+                </div>
+        </div>
+                </FontChoice> 
+            </BorderChoice>
+        </BackgroundColor>
+        </div>
+        </div>
+        <br/>
+    <p className='created-by'>
+Created By: {card.created_by}
+    <div className='navigate-cards'>
+        <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+    </div>
+    </p>
+    <br/>
+    <br/>
+    <br/>
+    </>
+    )))}
+    </>
+)}

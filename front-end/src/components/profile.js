@@ -62,7 +62,7 @@ const FontChoice = styled.section`
         <>
         <Avatar />
         <h1>{username.token}</h1>
-            <div> follow/unfollow button </div>
+            <div>Followers</div>
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username.token).map((card => (
     <>
