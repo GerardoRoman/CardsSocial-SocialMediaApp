@@ -139,24 +139,36 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class FollowshipAPIView(APIView):
+    ''' follow and unfollow user
+    '''
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
+    # handles HTTP POST requests to the view. The username parameter is passed in from the URL.
     def post(self, request, username):
         follower = request.user
+        # fetch following user from database based on username from URL. If the user doesn't exist, a 404 error is raised.
         following = get_object_or_404(User, username=username)
 
+    # creates a new instance of the Followship model with the given follower and following parameters.
         followship = Followship.objects.create(
             follower=follower, following=following)
 
+    # creates new instance of the FollowshipSerializer class, which is responsible for serializing the Followship instance into a JSON-formatted response.
         serializer = FollowshipSerializer(followship)
+    # creates an HTTP response using the serialized data obtained from the FollowshipSerializer and returns it.
+    # serializer.data property contains the serialized data in JSON format.
+    # HTTP status code 201 CREATED indicates that the request was successful and a new resource has been created.
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, username):
         follower = request.user
         following = get_object_or_404(User, username=username)
+
+        # fetches the Followship object from the database that links the follower and following users.
         followship = get_object_or_404(
             Followship, follower=follower, following=following)
+
         followship.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
