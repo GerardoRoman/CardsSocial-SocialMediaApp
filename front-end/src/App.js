@@ -10,6 +10,7 @@ import Registration from './components/newuser.js'
 import useLocalStorageState from 'use-local-storage-state'
 import { Route, Routes } from 'react-router-dom'
 import ViewOtherProfile from './components/view-other-profile';
+import ErrorPage from './components/404';
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/cardview/:cardNumber' element= {<Cards />} />
           <Route path='/viewotherprofile/:currentProfile' element= {<ViewOtherProfile />} />
+          <Route path='/404page' element={<ErrorPage/>} />
         </Routes>
         </>
       ) : (
