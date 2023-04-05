@@ -18,7 +18,7 @@ export default function Profile({ username, token }) {
             }
         }).then((response) => {
             console.log(response.data.results)
-            setCardList(response.data.results)
+            setCardList(response.data.results.reverse())
         })
 
         setCardNumber(cardList.id)
@@ -50,7 +50,8 @@ export default function Profile({ username, token }) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
-            }})
+            }
+        })
             .then(() => setCardList((cardList) => cardList.filter((card) => card.id !== cardID)))
     }
 
