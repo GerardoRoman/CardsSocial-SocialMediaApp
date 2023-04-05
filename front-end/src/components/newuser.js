@@ -1,28 +1,47 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import ErrorPage from "./404.js"
+import { useNavigate } from 'react-router-dom'
 
 
 const Registration = ({ setAuth }) => {
     const [userName, setUserName] = useState('')
     const [passWord, setPassWord] = useState('')
     const [error, setError] = useState('')
+    const navigate = useNavigate();
 
 
     const handleRegister = (event) => {
+        console.log('AXIOS')
+        event.preventDefault()
         axios.post('https://social-cards-app.onrender.com/auth/users/', {
             username: userName,
             password: passWord
         }).then(res => {
-            setAuth(res.data.auth_token, userName)
-        })
+            console.log('2ndAXIOS')
+            axios.post('https://social-cards-app.onrender.com/auth/token/login/',
+                {
+                    username: userName,
+                    password: passWord,
 
-        return (
-            <>
-                <h1>Sign Up</h1>
+                }).then(res => {
+                    const token = res.data.auth_token;
+                    setAuth(token, userName);
+                    console.log(res.data);
+                    console.log('3ndAXIOS')
+                    navigate("/");
+                });
+        })
+    }
+
+
+    return (
+        <>
+            <h1>Sign Up</h1>
+            <div className='login-form'>
                 <form onFocus={() => setError(null)} onSubmit={handleRegister}>
                     <div>
-                        <label> <span>username</span></label>
+                        <label><span>username: </span></label>
                         <input
                             type='text'
                             name='username'
@@ -34,7 +53,7 @@ const Registration = ({ setAuth }) => {
                         </input>
                     </div>
                     <div>
-                        <label><span>password</span></label>
+                        <label><span>password: </span></label>
                         <input
                             type='password'
                             name='password'
@@ -49,11 +68,10 @@ const Registration = ({ setAuth }) => {
                         <button type='submit'>Submit!</button>
                     </div>
                 </form>
-                {error && <ErrorPage />}
-            </>
-        )
-
-    }
-}
+            </div>
+            {error && <ErrorPage />}
+        </>
+    )
+};
 
 export default Registration
