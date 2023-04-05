@@ -56,10 +56,32 @@ h4 {
     text-align: center;
 }
 
+
+.return-home {
+    text-align: center;
+}
+
+/* COMPONENTS */
+
+/* Login Screen */
+.signUpPrompt {
+    display: flex;
+    justify-content: center;
+}
+
+.signUpLink {
+    padding-top: 16px;
+    padding-left: 8px;
+}
+
 .login-form {
     text-align: center;
 }
 
-.return-home {
+/* Sign Up Screen */
+.login-form {
+    text-align: center;
+}
+.edit-form {
     text-align: center;
 }

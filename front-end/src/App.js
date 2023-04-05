@@ -14,6 +14,8 @@ import ViewOtherProfile from './components/view-other-profile';
 import axios from 'axios';
 import ErrorPage from './components/404';
 import { FollowingList, FollowersList } from './components/followersList';
+import Edit from './components/edit.js'
+
 
 
 function App() {
@@ -43,29 +45,29 @@ function App() {
 
   return (
     <>
-      <Navbar
-        token={token}
-        username={username}
-        handleLogout={handleLogout}
-      />
-
       {token ? (
         <>
+          <Navbar
+            token={token}
+            username={username}
+            handleLogout={handleLogout}
+          />
           <Routes>
-
-            <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
+            <Route path='/' element={<CardList username={username} token={token} />} />
             <Route path='/new' element={<NewCard username={username} token={token} />} />
             <Route path='/profile' element={<Profile username={username} token={token} />} />
             <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
             <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
             <Route path='/404page' element={<ErrorPage />} />
             <Route path='/follow-list' element={<FollowersList username={username} token={token} />} />
+            <Route path='/edit/:cardNumber' element={<Edit username={username} token={token}/>} />
           </Routes>
         </>
       ) : (
         <div>
           <Routes>
             <Route path='/' element={token ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
+            <Route path='/signup' element={<Registration setAuth={setAuth} />} />
           </Routes>
         </div>)
       }</>

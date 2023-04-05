@@ -20,7 +20,7 @@ export default function Profile({ username, token }) {
             }
         }).then((response) => {
             console.log(response.data.results)
-            setCardList(response.data.results)
+            setCardList(response.data.results.reverse())
         })
 
         setCardNumber(cardList.id)
@@ -52,7 +52,8 @@ export default function Profile({ username, token }) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
-            }})
+            }
+        })
             .then(() => setCardList((cardList) => cardList.filter((card) => card.id !== cardID)))
     }
 
@@ -103,6 +104,7 @@ export default function Profile({ username, token }) {
                         <div className='navigate-cards'>
                             <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
                             <button onClick={() => deleteCard(card.id)}>Delete</button>
+                            <button><a href={`/edit/${card.id}`}>Edit</a></button>
                         </div>
                     </p>
                     <br />
