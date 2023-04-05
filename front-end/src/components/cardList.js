@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import NewCard from '../new-card';
+import NewCard from './new-card';
 import Cards from './cards.js';
 import { Navigate } from "react-router-dom";
 
@@ -92,7 +92,7 @@ export default function CardList() {
             </div>
             <br/>
         <p className='created-by'>
-    Created By: {card.created_by}
+    Created By: <a href={`/viewotherprofile/${card.created_by}`}>{card.created_by}</a>
         <div className='navigate-cards'>
             <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
         </div>
