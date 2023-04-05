@@ -78,7 +78,6 @@ export default function Profile({ username, token }) {
             <h1>{username}</h1>
             <FollowersList username={username} token={token} />
             <FollowingList username={username} token={token} />
-            <div>Followers</div>
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username).map((card => (
                 <>
