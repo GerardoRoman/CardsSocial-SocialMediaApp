@@ -18,7 +18,7 @@ function Navbar({ handleLogout }) {
                         <li><a href="/">Home</a></li>
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/new">Make a new card</a></li>
-                        <li><a onClick={handleLogout} href="/logout">Logout</a></li>
+                        <li onClick={handleLogout}><a onClick={handleLogout} href="/logout">Logout</a></li>
                     </div>}
                     <button className='hamburger' onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
                         <FaBars />
