@@ -27,12 +27,6 @@ useEffect(() => {
 console.log(cardList)
 console.log(cardNumber)
 
-// const userCards = cardList.filter(creator => creator.created_by === username.token)
-// console.log(userCards)
-
-
-
-
 const TitleBox = styled.p`
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
