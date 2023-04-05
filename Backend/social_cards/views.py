@@ -155,3 +155,29 @@ class FollowshipAPIView(APIView):
         followship.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ListUsersYouFollow(generics.ListAPIView):
+    ''' list all the users you follow
+    '''
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        followships = Followship.objects.filter(follower=user)
+        users_following = [followship.following for followship in followships]
+        return users_following
+
+
+# class ListFollowingCards(generics.ListAPIView):
+#     ''' list all the card by users you follow
+#     '''
+#     serializer_class = CardSerializer
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def get_queryset(self):
+#         user = self.request.user
+#         followships = Followship.objects.filter(follower=user)
