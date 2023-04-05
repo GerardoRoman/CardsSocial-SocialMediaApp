@@ -22,6 +22,24 @@ export default function Cards({ token }) {
         })
     }, [])
 
+
+
+    const TitleBox = styled.p`
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    overflow: auto;
+    outline: none;
+    // border: 1px solid black;
+    width: 100%;
+    height: 3rem;
+    font-family: ${props => props.font};
+    font-size: 30px;
+    resize: none;
+    text-align: center;
+    // border-bottom: 2px solid black
+    margin-top: 30%;
+    `
+
     const StyledTextArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
         border-color: rgba(0, 0, 0, 0);
@@ -78,6 +96,25 @@ export default function Cards({ token }) {
     return (
         <>
             <h1>Card View</h1>
+                <div className='card'>
+                <h4>COVER</h4>
+                            <BackgroundColor background={cardChoice.color}>
+                                <BorderChoice border={cardChoice.border}>
+                                    <FontChoice font={cardChoice.font}>
+                                        <div>
+                                            <div className='card-back'>
+                                                <TitleBox placeholder='Title' id='title' name='title'>{cardChoice.title_text}</TitleBox>
+                                            </div>
+                                        </div>
+                                    </FontChoice>
+                                </BorderChoice>
+                            </BackgroundColor>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             <div className='card-container'>
                 <div className='card'>
                     <h1>Inside Left</h1>

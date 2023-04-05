@@ -99,6 +99,7 @@ export default function Profile({ username, token }) {
                         <div className='navigate-cards'>
                             <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
                             <button onClick={() => deleteCard(card.id)}>Delete</button>
+                            <button><a href={`/edit/${card.id}`}>Edit</a></button>
                         </div>
                     </p>
                     <br />
