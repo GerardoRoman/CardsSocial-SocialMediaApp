@@ -22,7 +22,7 @@ export default function CardList({ token }) {
             }
         }).then((response) => {
             console.log(response.data.results)
-            setCardList(response.data.results)
+            setCardList(response.data.results.reverse())
         })
 
         setCardNumber(cardList.id)
