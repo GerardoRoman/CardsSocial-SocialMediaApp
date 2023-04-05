@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useStreamContext } from 'react-activity-feed'
 
 export default function useFollow({ userId }) {
-    const { client } = useStreamContext()
+    const { client } = useState()
 
     const [isFollowing, setIsFollowing] = useState(false)
     
