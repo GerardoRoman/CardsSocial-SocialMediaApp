@@ -15,4 +15,9 @@ urlpatterns = [
          views.UserCardDetail.as_view(), name='card-edit-update'),
     path('follow/<str:username>/',
          views.FollowshipAPIView.as_view(), name='followship'),
+    path('users/following/', views.ListUsersYouFollow.as_view(),
+         name='user-following-list'),
+    #     path('users/following/cards/', views.ListFollowingCards.as_view(),
+    #          name='user-following-cards'),
+
 ]
