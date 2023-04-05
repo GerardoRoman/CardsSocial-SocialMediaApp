@@ -7,13 +7,13 @@ export default function Profile({ username, token }) {
     const [cardList, setCardList] = useState(0)
     const [cardNumber, setCardNumber] = useState(1)
 
-    console.log(username.token)
+    console.log(username.username)
 
     useEffect(() => {
         axios.get('https://social-cards-app.onrender.com/cards/', {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Token ${token}`
+                'Authorization': `Token ${token}`
             }
         }).then((response) => {
             console.log(response.data.results)
@@ -61,10 +61,10 @@ export default function Profile({ username, token }) {
     return (cardList.length) > 0 && (
         <>
             <Avatar />
-            <h1>{username.token}</h1>
+            <h1>{username}</h1>
             <div>Followers</div>
             <h4> CARDS </h4>
-            {cardList.filter(creator => creator.created_by === username.token).map((card => (
+            {cardList.filter(creator => creator.created_by === username).map((card => (
                 <>
                     <div className='card-container'>
                         <div className='card'>
