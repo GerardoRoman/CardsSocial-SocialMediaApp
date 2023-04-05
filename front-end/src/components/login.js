@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import Error from './error.js'
 import { useNavigate } from 'react-router-dom'
+import ErrorPage from './404.js'
 
 const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('')
@@ -64,7 +65,7 @@ const Login = ({ setAuth }) => {
                 </div>
             </form>
             </div>
-            {error && <Error message={error.message} />}
+            {error && <ErrorPage />}
         </>
     )
 }
