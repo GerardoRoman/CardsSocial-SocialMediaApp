@@ -2,7 +2,7 @@ import useFollow from '../hooks/useFollow'
 import classNames from 'classnames'
 
 export default function FollowBtn({ userId }) {
-    const { isFollowing, toggleFollow } = useFollow({ userId })
+    const { isFollowing, toggleFollow } = useFollow(userId)
 
     return (
         <>

@@ -1,29 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react';
 
-export default function useFollow({ userId }) {
-    const { client } = useState()
+export default function useFollow(userId) {
+    const [isFollowing, setIsFollowing] = useState(false);
 
-    const [isFollowing, setIsFollowing] = useState(false)
-    
-    useEffect(() => {
-        async function init() {
-            const response = await client
-            // .feed('timeline', client.userId)
-            .following({ filter: [`user:${userId}`] })
+    async function toggleFollow() {
+    const response = await fetch(`https://social-cards-app.onrender.com/cards/follow/${userId}`, {
+    method: 'PUT',
+});
 
-        setIsFollowing(!!response.results.length)
-        }
-
-    init()
-}, [])
-
-const toggleFollow = async () => {
-    const action = isFollowing ? 'unfollow' : 'follow'
-
-    const timelineFeed = client.feed('timeline', client.userId)
-    await timelineFeed[action]('user', userId)
-
-    setIsFollowing((isFollowing) => !isFollowing)
+    if (response.ok) {
+        setIsFollowing(!isFollowing);
     }
-    return { isFollowing, toggleFollow }
+}
+
+return { isFollowing, toggleFollow };
 }
