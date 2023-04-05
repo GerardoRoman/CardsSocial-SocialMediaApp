@@ -8,18 +8,36 @@ import Navbar from './components/navbar.js'
 import Login from './components/login.js'
 import Registration from './components/newuser.js'
 import useLocalStorageState from 'use-local-storage-state'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ViewOtherProfile from './components/view-other-profile';
+import axios from 'axios';
 
 
 
 function App() {
   const [token, setToken] = useLocalStorageState('loginToken', '')
   const [username, setUsername] = useLocalStorageState('userUsername', '')
+  const navigate = useNavigate();
+
 
   const setAuth = (token, username) => {
     setToken(token)
     setUsername(username)
+  }
+
+  const handleLogout = () => {
+    axios.post('https://social-cards-app.onrender.com/auth/token/logout/',
+      {},
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    ).then(() => {
+      setAuth('', null)
+      navigate('/')
+    })
   }
 
   const loggedIn = token
@@ -28,22 +46,26 @@ function App() {
     <>
       {loggedIn ? (
         <>
-        <Navbar/>
-        <Routes>
-          
-          <Route path='/Profile' element={<Profile username={username} token={token} />} />
-          <Route path='/' element={<CardList />} />
-          <Route path='/profile' element={<Profile username={username} token={token} />} />
-          <Route path='/new' element={<NewCard />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/cardview/:cardNumber' element= {<Cards />} />
-          <Route path='/viewotherprofile/:currentProfile' element= {<ViewOtherProfile />} />
-        </Routes>
+          <Navbar
+            token={token}
+            username={username}
+            handleLogout={handleLogout}
+          />
+          <Routes>
+
+            <Route path='/Profile' element={<Profile username={username} token={token} />} />
+            <Route path='/' element={<CardList username={username} token={token} />} />
+            <Route path='/profile' element={<Profile username={username} token={token} />} />
+            <Route path='/new' element={<NewCard username={username} token={token} />} />
+            <Route path='/profile' element={<Profile username={username} token={token} />} />
+            <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
+            <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
+          </Routes>
         </>
       ) : (
         <div>
           <Routes>
-            <Route path='/' element={loggedIn ? <CardList /> : <Login setAuth={setAuth} />} />
+            <Route path='/' element={loggedIn ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
           </Routes>
         </div>)
       }</>
