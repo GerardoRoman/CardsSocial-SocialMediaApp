@@ -14,7 +14,7 @@ export default function ViewOtherProfile (username, token) {
         axios.get('https://social-cards-app.onrender.com/cards/', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
+                'Authorization':   `token ${token}`
                 }
         }).then((response) => {
             console.log(response.data.results)
