@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import NewCard from './new-card.js'
+import NewCard from './components/new-card.js'
 import Cards from './components/cards.js'
 import CardList from './components/cardList.js'
 import Profile from './components/profile.js'
