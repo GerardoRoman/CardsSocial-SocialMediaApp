@@ -17,7 +17,7 @@ urlpatterns = [
          views.FollowshipAPIView.as_view(), name='followship'),
     path('users/following/', views.ListUsersYouFollow.as_view(),
          name='user-following-list'),
-    #     path('users/following/cards/', views.ListFollowingCards.as_view(),
-    #          name='user-following-cards'),
+    path('users/following/cards/', views.ListFollowingCards.as_view(),
+         name='user-following-cards'),
 
 ]
