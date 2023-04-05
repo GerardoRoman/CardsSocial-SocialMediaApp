@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import axios from 'axios'
-import Error from './error.js'
 import { useNavigate } from 'react-router-dom'
 import ErrorPage from './404.js'
 
@@ -60,7 +59,9 @@ const Login = ({ setAuth }) => {
                     <div>
                         <button type='submit'>Submit!</button>
                     </div>
-                    <div className="signUpTxt" type='submit'>
+                    <div className="signUpPrompt" type='submit'>
+                        <p>Not a member yet?</p>
+                        <a className="signUpLink" href="/signup">Sign Up!</a>
                     </div>
                 </form>
             </div>
