@@ -1,5 +1,7 @@
 from .models import Followship, User
 from rest_framework.views import APIView
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -91,6 +93,7 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    # lookup_field = 'username'
 
 
 class UserCardList(generics.ListAPIView):
@@ -118,33 +121,42 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
         return Card.objects.filter(created_by=user)
 
 
-class FollowUser(generics.CreateAPIView):
-    ''' follow another user
-    '''
-    serializer_class = FollowshipSerializer
-    queryset = Followship.objects.all()
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def perform_create(self, serializer):
-        follower = self.request.user
-        serializer.save(follower=follower)
-
-
-# class UnfollowUser(generics.DestroyAPIView):
-#     ''' unfollow another user
+# class FollowUser(generics.CreateAPIView):
+#     ''' follow another user
 #     '''
 #     serializer_class = FollowshipSerializer
 #     queryset = Followship.objects.all()
 #     authentication_classes = [TokenAuthentication]
 #     permission_classes = [IsAuthenticated]
 
-#     def get_object(self):
+#     # will be called when a new Followship instance is created.
+#     # This method is responsible for saving the instance to the database.
+#     def perform_create(self, serializer):
 #         follower = self.request.user
-#         following =
-#         Followship.objects.get(follower=follower, following=following).delete()
+#         # This line saves the serializer instance to the database
+#         # with the follower field set to the authenticated user.
+#         serializer.save(follower=follower)
 
-#     def perform_destroy(self, instance):
-#         instance.delete()
 
-# # class UsersYouFollowList():
+class FollowshipAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, username):
+        follower = request.user
+        following = get_object_or_404(User, username=username)
+
+        followship = Followship.objects.create(
+            follower=follower, following=following)
+
+        serializer = FollowshipSerializer(followship)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def delete(self, request, username):
+        follower = request.user
+        following = get_object_or_404(User, username=username)
+        followship = get_object_or_404(
+            Followship, follower=follower, following=following)
+        followship.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
