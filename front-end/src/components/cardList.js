@@ -7,19 +7,19 @@ import { Navigate } from "react-router-dom";
 
 
 
-export default function CardList() {
+export default function CardList({ token }) {
     const [cardList, setCardList] = useState(0)
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
     const [cardNumber, setCardNumber] = useState(1)
-    
+
     useEffect(() => {
         axios.get('https://social-cards-app.onrender.com/cards/', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
-                }
+                Authorization: `Token ${token}`
+            }
         }).then((response) => {
             console.log(response.data.results)
             setCardList(response.data.results)
@@ -27,7 +27,7 @@ export default function CardList() {
 
         setCardNumber(cardList.id)
         console.log(cardNumber)
-        
+
     }, [])
 
     const TitleBox = styled.p`
@@ -68,40 +68,40 @@ export default function CardList() {
     console.log(cardList.border)
     console.log(cardList.color)
     console.log(cardList.font)
-    
+
     return (cardList.length) > 0 && (
         <>
-    <h1>Card Feed</h1>
-    {cardList.map((card => (
-    <>
-    <div className='card-container'>
-    <div className='card'>
-                <h4>COVER</h4>
-            <BackgroundColor background={card.color}> 
-                <BorderChoice border={card.border}>  
-                    <FontChoice font={card.font}>      
-            <div> 
-                    <div className='card-back'>
-                    <TitleBox placeholder='Title' id='title' name='title'>{card.title_text}</TitleBox>                
+            <h1>Card Feed</h1>
+            {cardList.map((card => (
+                <>
+                    <div className='card-container'>
+                        <div className='card'>
+                            <h4>COVER</h4>
+                            <BackgroundColor background={card.color}>
+                                <BorderChoice border={card.border}>
+                                    <FontChoice font={card.font}>
+                                        <div>
+                                            <div className='card-back'>
+                                                <TitleBox placeholder='Title' id='title' name='title'>{card.title_text}</TitleBox>
+                                            </div>
+                                        </div>
+                                    </FontChoice>
+                                </BorderChoice>
+                            </BackgroundColor>
+                        </div>
                     </div>
-            </div>
-                    </FontChoice> 
-                </BorderChoice>
-            </BackgroundColor>
-            </div>
-            </div>
-            <br/>
-        <p className='created-by'>
-    Created By: <a href={`/viewotherprofile/${card.created_by}`}>{card.created_by}</a>
-        <div className='navigate-cards'>
-            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
-        </div>
-        </p>
-        <br/>
-        <br/>
-        <br/>
+                    <br />
+                    <p className='created-by'>
+                        Created By: <a href={`/viewotherprofile/${card.created_by}`}>{card.created_by}</a>
+                        <div className='navigate-cards'>
+                            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+                        </div>
+                    </p>
+                    <br />
+                    <br />
+                    <br />
+                </>
+            )))}
         </>
-        )))}
-    </>
     )
 }
