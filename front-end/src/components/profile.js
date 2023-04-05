@@ -2,6 +2,7 @@ import Avatar from './profile-icon.js'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
+import FollowBtn from './followBtn.js'
 
 export default function Profile(username, token) {
 const [cardList, setCardList] = useState(0)
@@ -63,6 +64,7 @@ const FontChoice = styled.section`
         <Avatar />
         <h1>{username.token}</h1>
             <div>Followers</div>
+            <FollowBtn />
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username.token).map((card => (
     <>
