@@ -139,5 +139,12 @@ class FollowUser(generics.CreateAPIView):
 #     authentication_classes = [TokenAuthentication]
 #     permission_classes = [IsAuthenticated]
 
+#     def get_object(self):
+#         follower = self.request.user
+#         following =
+#         Followship.objects.get(follower=follower, following=following).delete()
+
 #     def perform_destroy(self, instance):
 #         instance.delete()
+
+# # class UsersYouFollowList():
