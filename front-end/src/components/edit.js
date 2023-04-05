@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Edit({ token }) {
@@ -9,7 +10,11 @@ export default function Edit({ token }) {
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
+    const [coverText, setCoverText] = useState('')
+    const [insideLeft, setInsideLeft] = useState('')
+    const [isnideRight, setInsideRight] = useState('')
     const { cardNumber } = useParams()
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -20,6 +25,12 @@ export default function Edit({ token }) {
         }).then((response) => {
             console.log(response.data)
             setCardChoice(response.data)
+            setBackground(response.data.color)
+            setBorder(response.data.border)
+            setFont(response.data.border)
+            setCoverText(response.data.title_text)
+            setInsideLeft(response.data.card_front_message)
+            setInsideRight(response.data.card_back_message)
         })
     }, [])
 
@@ -33,7 +44,7 @@ export default function Edit({ token }) {
     // border: 1px solid black;
     width: 100%;
     height: 3rem;
-    font-family: ${props => props.font};
+    font-family: ${font};
     font-size: 30px;
     resize: none;
     text-align: center;
@@ -52,7 +63,7 @@ export default function Edit({ token }) {
         rows: "33";
         cols: "50";
         resize: none;
-        font-family: ${cardChoice.font};
+        font-family: ${font};
         font-size: 25px;
     `
     const StyledBackArea = styled.textarea`
@@ -65,38 +76,74 @@ export default function Edit({ token }) {
         rows: "33";
         cols: "50";
         resize: none;
-        font-family: ${cardChoice.font};
+        font-family: ${font};
         font-size: 30px;
         text-align: center;
         margin-top: 30%        
     `
 
     const BackgroundColor = styled.section`
-        background: ${cardChoice.color};
+        background: ${background};
         width: 100%;
         height: 100%;
         `
     const BorderChoice = styled.section`
-        border: 5px ${cardChoice.border} black;  
+        border: 5px ${border} black;  
         width: 98%;
         height: 98%;
     `
 
     const FontChoice = styled.section`
-        font-family: ${cardChoice.font};
+        font-family: ${font};
     `
+
+
+    function handlePost(resultsObject) {
+        axios.patch(`https://social-cards-app.onrender.com/users/my-cards/${cardNumber}`,
+            resultsObject,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${token}`
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                navigate("/profile")
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            ;
+    }
+
+    function handleSubmit(event) {
+        console.log('click)')
+            event.preventDefault();
+            const resultsObject = {
+                title_text: coverText,
+                card_front_message: insideLeft,
+                card_back_message: isnideRight,
+                color: background,
+                border: border,
+                font: font,
+            }
+            console.log(resultsObject)
+            handlePost(resultsObject)
+    }
 
     return (
         <>
             <h1>Card View</h1>
                 <div className='card'>
                 <h4>COVER</h4>
-                            <BackgroundColor background={cardChoice.color}>
-                                <BorderChoice border={cardChoice.border}>
-                                    <FontChoice font={cardChoice.font}>
+                            <BackgroundColor background={background}>
+                                <BorderChoice border={background}>
+                                    <FontChoice font={background}>
                                         <div>
                                             <div className='card-back'>
-                                                <TitleBox placeholder='Title' id='title' name='title'>{cardChoice.title_text}</TitleBox>
+                                                <TitleBox placeholder='Title' id='title' name='title'
+                                                onChange={(event) => setCoverText(event.target.value)}>{coverText}</TitleBox>
                                             </div>
                                         </div>
                                     </FontChoice>
@@ -112,11 +159,12 @@ export default function Edit({ token }) {
                 <div className='card'>
                     <h1>Inside Left</h1>
                     <BackgroundColor>
-                        <BorderChoice>
+                        <BorderChoice >
                             <FontChoice>
                                 <div>
                                     <div className='card-body'>
-                                        <StyledTextArea placeholder='Roses are red...' id='body' name='body'>{cardChoice.card_front_message}</StyledTextArea>
+                                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' 
+                                        onChange={(event) => setInsideLeft(event.target.value)}>{insideLeft}</StyledTextArea>
                                     </div>
                                 </div>
                             </FontChoice>
@@ -131,7 +179,8 @@ export default function Edit({ token }) {
                             <FontChoice>
                                 <div>
                                     <div className='card-back'>
-                                        <StyledBackArea placeholder='Sign here' id='back' name='back'>{cardChoice.card_back_message}</StyledBackArea>
+                                        <StyledBackArea placeholder='Sign here' id='back' name='back'
+                                        onChange={(event) => setInsideRight(event.target.value)}>{isnideRight}</StyledBackArea>
                                     </div>
                                 </div>
                             </FontChoice>
@@ -144,34 +193,30 @@ export default function Edit({ token }) {
             <p className='created-by'>
                 Created By: {cardChoice.created_by}
             </p>
-            <form className='edit-form'>
+            <form className='edit-form' onSubmit={handleSubmit}>
                 <div>
                     <label>Background color: </label>
-                    <select defaultValue={cardChoice.color}  >
-                        <option value="red">Red</option>
-                        <option value='blue'>Blue</option>
-                        <option value='green'>Green</option>
+                    <select onChange={(event) => setBackground(event.target.value)} >
+                        <option value="lightcoral">Red</option>
+                        <option value='aqua'>Blue</option>
+                        <option value='lightgreen'>Green</option>
                         </select>
                 </div>
                 <div>
                     <label>Border type: </label>
-                    <input value={cardChoice.border} readOnly={true}  />
+                    <select onChange={(event) => setBorder(event.target.value)} >
+                        <option value="dashed">Dashed</option>
+                        <option value='dotted'>Dotted</option>
+                        <option value='solid'>Solid</option>
+                        </select>
                 </div>
                 <div>
                     <label>Font type: </label>
-                    <input value={cardChoice.font} readOnly={true}  />
-                </div>
-                <div>
-                    <label for='title-text'>Cover text: </label>
-                    <textarea value={cardChoice.title_text}/>
-                </div>
-                <div>
-                    <label for='body-text'>Inside left: </label>
-                    <textarea value={cardChoice.card_front_message}/>
-                </div>
-                <div>
-                    <label for='back-text'>Inside Right: </label>
-                    <textarea value={cardChoice.card_back_message}/>
+                    <select onChange={(event) => setFont(event.target.value)} >
+                        <option value="Dancing Script">Cursive</option>
+                        <option value='Delicious Handrawn'>Handwritten</option>
+                        <option value='Playfair Display'>Plain</option>
+                        </select>
                 </div>
                 <div className='submit'>
                     <button type='submit'>Submit</button>
