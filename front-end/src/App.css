@@ -63,3 +63,11 @@ h4 {
 .return-home {
     text-align: center;
 }
+
+/* COMPONENTS */
+
+/* Login Screen */
+.signUpPrompt {
+    display: flex;
+    justify-content: center;
+}

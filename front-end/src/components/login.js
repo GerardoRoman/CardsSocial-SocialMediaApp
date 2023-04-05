@@ -30,7 +30,7 @@ const Login = ({ setAuth }) => {
 
     return (
         <>
-            <h1>Log In</h1>
+            <h1 >Log In</h1>
             <div className='login-form'>
                 <form onFocus={() => setError(null)} onSubmit={handleSubmit}>
                     <div>
@@ -60,7 +60,9 @@ const Login = ({ setAuth }) => {
                     <div>
                         <button type='submit'>Submit!</button>
                     </div>
-                    <div className="signUpTxt" type='submit'>
+                    <div className="signUpPrompt" type='submit'>
+                        <p>Not a member yet?</p>
+                        <a className="signUpLink" href="/auth/users/">Sign Up!</a>
                     </div>
                 </form>
             </div>

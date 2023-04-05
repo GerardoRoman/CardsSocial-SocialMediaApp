@@ -43,16 +43,15 @@ function App() {
 
   return (
     <>
-      <Navbar
-        token={token}
-        username={username}
-        handleLogout={handleLogout}
-      />
 
       {token ? (
         <>
+          <Navbar
+            token={token}
+            username={username}
+            handleLogout={handleLogout}
+          />
           <Routes>
-
             <Route path='/Profile' element={<Profile username={username} token={token} />} />
             <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
             <Route path='/profile' element={<Profile username={username} token={token} />} />
