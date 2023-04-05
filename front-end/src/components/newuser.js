@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import ErrorPage from "./404.js"
-import Error from './error.js'
 
 
 const Registration = ({ setAuth }) => {

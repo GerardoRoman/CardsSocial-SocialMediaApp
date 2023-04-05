@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function NewCard(){
+function NewCard({ token }) {
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
     const [font, setFont] = useState(null);
@@ -79,78 +79,79 @@ function NewCard(){
         font-family: ${font};
     `
 
-    
+
 
     useEffect(() => {
         console.log('useEffect runs')
     })
 
-    function handlePost(resultsObject){
-    axios.post('https://social-cards-app.onrender.com/cards/create/', 
-        resultsObject,
-    {   
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token fa66f9917840e2033844150df3f9bf5b96459bbb'
-        }
-    })
-    .then(function(response){
-        console.log(response);
-        navigate("/")
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-    ;}
+    function handlePost(resultsObject) {
+        axios.post('https://social-cards-app.onrender.com/cards/create/',
+            resultsObject,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${token}`
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                navigate("/")
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            ;
+    }
 
     function handleSubmit(event) {
         event.preventDefault();
-    console.log('Background Color: ', background);
-    console.log('Border Selection: ', border);
-    console.log('Font Selection: ', font);
-    console.log('Title Text: ', title.current.value)
-    console.log('Body Text: ', body.current.value);
-    console.log('Back Text: ', back.current.value);
-    const resultsObject = {
-        title_text: title.current.value,
-        card_front_message: body.current.value,
-        card_back_message: back.current.value,
-        color: background,
-        border: border,
-        font: font,
+        console.log('Background Color: ', background);
+        console.log('Border Selection: ', border);
+        console.log('Font Selection: ', font);
+        console.log('Title Text: ', title.current.value)
+        console.log('Body Text: ', body.current.value);
+        console.log('Back Text: ', back.current.value);
+        const resultsObject = {
+            title_text: title.current.value,
+            card_front_message: body.current.value,
+            card_back_message: back.current.value,
+            color: background,
+            border: border,
+            font: font,
+        }
+        handlePost(resultsObject)
     }
-    handlePost(resultsObject)
-    }
-    
+
     function backgroundChoice(colors) {
         console.log('clicked')
-        if (colors.target.innerText === 'Blue'){
+        if (colors.target.innerText === 'Blue') {
             setBackground('aqua')
         }
-        if (colors.target.innerText === 'Red'){
+        if (colors.target.innerText === 'Red') {
             setBackground('lightcoral')
         }
-        if (colors.target.innerText === 'Green'){
+        if (colors.target.innerText === 'Green') {
             setBackground('lightgreen')
-        } 
+        }
     }
 
     function borderChoice(borders) {
         console.log('clicked')
-        if (borders.target.innerText === 'Dotted'){
+        if (borders.target.innerText === 'Dotted') {
             setBorder('dotted')
         }
-        if (borders.target.innerText === 'Dashed'){
+        if (borders.target.innerText === 'Dashed') {
             setBorder('dashed')
         }
-        if (borders.target.innerText === 'Solid'){
+        if (borders.target.innerText === 'Solid') {
             setBorder('solid')
-        } 
+        }
     }
 
-    function fontChoice(fonts){
+    function fontChoice(fonts) {
         console.log('clicked')
-        if (fonts.target.innerText === 'Handwritten'){
+        if (fonts.target.innerText === 'Handwritten') {
             setFont('Delicious Handrawn')
         }
         if (fonts.target.innerText === 'Plain') {
@@ -163,106 +164,106 @@ function NewCard(){
 
     return (
         <>
-        <h1>New Card</h1>
-        <br/>
-        <div className='customize-buttons'>
-            <br/>
-        <span>
-            Select a background color!<br/>
-        {colorChoices.map(colors => <button className='ind-but' onClick={backgroundChoice}>{colors}</button>)}
-        </span>
-        <br/>
-        <span>
-        Select a border!<br/>
-            {borderChoices.map(borders => <button className='ind-but' onClick={borderChoice}>{borders}</button>)}
-        </span>
-        <br/>
-        <span>
-        Select a font!<br/>
-            {fontChoices.map(fonts => <button className='ind-but' onClick={fontChoice}>{fonts}</button>)}
-        </span>   
-        
-        </div>
-        <div className='card'>
+            <h1>New Card</h1>
+            <br />
+            <div className='customize-buttons'>
+                <br />
+                <span>
+                    Select a background color!<br />
+                    {colorChoices.map(colors => <button className='ind-but' onClick={backgroundChoice}>{colors}</button>)}
+                </span>
+                <br />
+                <span>
+                    Select a border!<br />
+                    {borderChoices.map(borders => <button className='ind-but' onClick={borderChoice}>{borders}</button>)}
+                </span>
+                <br />
+                <span>
+                    Select a font!<br />
+                    {fontChoices.map(fonts => <button className='ind-but' onClick={fontChoice}>{fonts}</button>)}
+                </span>
+
+            </div>
+            <div className='card'>
                 <h1>COVER</h1>
-            <BackgroundColor> 
-                <BorderChoice>  
-                    <FontChoice>      
-            <div> 
-                    <div className='card-back'>
-                    <TitleBox placeholder='Title' id='title' name='title' ref={title}></TitleBox>                </div>
+                <BackgroundColor>
+                    <BorderChoice>
+                        <FontChoice>
+                            <div>
+                                <div className='card-back'>
+                                    <TitleBox placeholder='Title' id='title' name='title' ref={title}></TitleBox>                </div>
+                            </div>
+                        </FontChoice>
+                    </BorderChoice>
+                </BackgroundColor>
             </div>
-                    </FontChoice> 
-                </BorderChoice>
-            </BackgroundColor>
-            </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className='card-container'>
-            <div className='card'>
-                <h1>Inside Left</h1>
-            <BackgroundColor> 
-                <BorderChoice>  
-                    <FontChoice>      
-            <div> 
-                    <div className='card-body'>
-                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={body}></StyledTextArea>              
+            <br />
+            <br />
+            <br />
+            <br />
+            <div className='card-container'>
+                <div className='card'>
+                    <h1>Inside Left</h1>
+                    <BackgroundColor>
+                        <BorderChoice>
+                            <FontChoice>
+                                <div>
+                                    <div className='card-body'>
+                                        <StyledTextArea placeholder='Roses are red...' id='body' name='body' ref={body}></StyledTextArea>
+                                    </div>
+                                </div>
+                            </FontChoice>
+                        </BorderChoice>
+                    </BackgroundColor>
+                </div>
+
+                <div className='card'>
+                    <h1>Inside Right</h1>
+                    <BackgroundColor>
+                        <BorderChoice>
+                            <FontChoice>
+                                <div>
+                                    <div className='card-back'>
+                                        <StyledBackArea placeholder='Sign here' id='back' name='back' ref={back}></StyledBackArea>
+                                    </div>
+                                </div>
+                            </FontChoice>
+                        </BorderChoice>
+                    </BackgroundColor>
                 </div>
             </div>
-                    </FontChoice> 
-                </BorderChoice>
-            </BackgroundColor>
-            </div>
 
-            <div className='card'>
-                <h1>Inside Right</h1>
-            <BackgroundColor> 
-                <BorderChoice>  
-                    <FontChoice>      
-            <div> 
-                    <div className='card-back'>
-                        <StyledBackArea placeholder='Sign here' id='back' name='back' ref={back}></StyledBackArea>              
+            <br></br>
+
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label></label>
+                    <input value={background} readOnly={true} hidden={true} />
                 </div>
-            </div>
-                    </FontChoice> 
-                </BorderChoice>
-            </BackgroundColor>
-            </div>
-        </div>
-
-        <br></br>
-        
-        <form onSubmit={handleSubmit}>
-            <div>
-            <label></label>
-                <input value={background} readOnly={true} hidden={true}/>
-            </div>
-            <div>
-            <label></label>
-                <input value={border} readOnly={true} hidden={true}/>
-            </div>
-            <div>
-            <label></label>
-                <input value={font} readOnly={true} hidden={true}/>
-            </div>
-            <div>
-                <label for='body-text'></label>
-                <input ref={body} hidden={true}/>
-            </div>
-            <div>
-                <label for='title-text'></label>
-                <input ref={title} hidden={true}/>
-            </div>
-            <div>
-            <label for='back-text'></label>
-                <input ref={back} hidden />
-            </div>
-            <div className='submit'>
-            <button type='submit'>Submit</button>
-            </div>
-        </form>
+                <div>
+                    <label></label>
+                    <input value={border} readOnly={true} hidden={true} />
+                </div>
+                <div>
+                    <label></label>
+                    <input value={font} readOnly={true} hidden={true} />
+                </div>
+                <div>
+                    <label for='body-text'></label>
+                    <input ref={body} hidden={true} />
+                </div>
+                <div>
+                    <label for='title-text'></label>
+                    <input ref={title} hidden={true} />
+                </div>
+                <div>
+                    <label for='back-text'></label>
+                    <input ref={back} hidden />
+                </div>
+                <div className='submit'>
+                    <button type='submit'>Submit</button>
+                </div>
+            </form>
         </>
     );
 }
