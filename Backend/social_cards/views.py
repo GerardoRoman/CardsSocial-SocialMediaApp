@@ -121,23 +121,6 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
         return Card.objects.filter(created_by=user)
 
 
-# class FollowUser(generics.CreateAPIView):
-#     ''' follow another user
-#     '''
-#     serializer_class = FollowshipSerializer
-#     queryset = Followship.objects.all()
-#     authentication_classes = [TokenAuthentication]
-#     permission_classes = [IsAuthenticated]
-
-#     # will be called when a new Followship instance is created.
-#     # This method is responsible for saving the instance to the database.
-#     def perform_create(self, serializer):
-#         follower = self.request.user
-#         # This line saves the serializer instance to the database
-#         # with the follower field set to the authenticated user.
-#         serializer.save(follower=follower)
-
-
 class FollowshipAPIView(APIView):
     ''' follow and unfollow user
     '''

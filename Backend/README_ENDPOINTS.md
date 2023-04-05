@@ -20,7 +20,7 @@ ___
 
 
 
-## 🐸  /cards/:id/
+## 🐸  /cards/id/
 
 Description: Retreves data for card with specified id 
 
@@ -93,7 +93,7 @@ ___
 
 
 
-## 🌿  /users/:id/
+## 🌿  /users/id/
 
 Description: Retreves data for user with specified id 
 
@@ -143,9 +143,9 @@ ___
 
 
 
-## 🦄   users/my-cards/:id/
+## 🦄   users/my-cards/id/
 
-Description: Detail view of card the logged in user had made, can EDIT or DELETE card
+Description: If `GET` request view of card the logged in user has made, if `PATCH`request can edit and `DELETE` request for delete card
 
 - Allowed Request: GET, PUT, PATCH, DELETE
 - Content-Type: application/json
@@ -154,31 +154,13 @@ ___
 
 
 
-## 🦖   users/follow/
+## 🦖   follow/username/
 
-Description: Follow another user
+Description: Follow or unfollow another user, if `POST` request it will follow user, if `DELETE` request it will unfollow user
 
-- Allowed Request: POST
+- Allowed Request: POST, DELETE
 - Content-Type: application/json
 
-`follower` = person logged in (pk)
-
-`following` = person logged in user wants to follow (pk)
-
-Example POST:
-```
-{
-	"following": "2"
-}
-```
-Stored As:
-```
-{
-	"id": 36,
-	"following": 2,
-	"follower": 8
-}
-```
 
 ___
 
@@ -186,7 +168,7 @@ ___
 
 ## 🐝   /auth/users/
 
-Description: Creates a new user if POST request, see list of authorized users if GET request
+Description: Creates a new user if `POST` request, if `GET` request returns stored info for logged in user
 
 - Allowed Request: GET, POST
 - Content-Type: application/json
