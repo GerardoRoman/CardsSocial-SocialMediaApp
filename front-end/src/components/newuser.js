@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import ErrorPage from "./404.js"
 import Error from './error.js'
 
 
@@ -49,7 +50,7 @@ const Registration = ({ setAuth }) => {
                         <button type='submit'>Submit!</button>
                     </div>
                 </form>
-                {error && <Error message={error.message} />}
+                {error && <ErrorPage />}
             </>
         )
 
