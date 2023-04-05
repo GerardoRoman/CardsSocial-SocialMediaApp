@@ -21,7 +21,7 @@ const Login = ({ setAuth }) => {
             password: password,
         }).then(res => {
             const token = res.data.auth_token;
-            setAuth(username, token);
+            setAuth(token, username);
             console.log(res.data);
             navigate("/");
         })
@@ -59,6 +59,8 @@ const Login = ({ setAuth }) => {
                     </div>
                     <div>
                         <button type='submit'>Submit!</button>
+                    </div>
+                    <div className="signUpTxt" type='submit'>
                     </div>
                 </form>
             </div>

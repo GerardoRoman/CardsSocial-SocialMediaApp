@@ -41,21 +41,20 @@ function App() {
     })
   }
 
-  const loggedIn = token
-
   return (
     <>
-      {loggedIn ? (
+      <Navbar
+        token={token}
+        username={username}
+        handleLogout={handleLogout}
+      />
+
+      {token ? (
         <>
-          <Navbar
-            token={token}
-            username={username}
-            handleLogout={handleLogout}
-          />
           <Routes>
 
             <Route path='/Profile' element={<Profile username={username} token={token} />} />
-            <Route path='/' element={<CardList username={username} token={token} />} />
+            <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
             <Route path='/profile' element={<Profile username={username} token={token} />} />
             <Route path='/new' element={<NewCard username={username} token={token} />} />
             <Route path='/profile' element={<Profile username={username} token={token} />} />
@@ -67,7 +66,7 @@ function App() {
       ) : (
         <div>
           <Routes>
-            <Route path='/' element={loggedIn ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
+            <Route path='/' element={token ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
           </Routes>
         </div>)
       }</>
