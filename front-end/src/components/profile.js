@@ -4,6 +4,7 @@ import axios from 'axios'
 import styled from 'styled-components';
 import FollowBtn from './followBtn.js'
 
+
 export default function Profile({ username, token }) {
     const [cardList, setCardList] = useState(0)
     const [cardNumber, setCardNumber] = useState(1)
@@ -43,6 +44,16 @@ export default function Profile({ username, token }) {
     // border-bottom: 2px solid black
     margin-top: 30%;
     `
+
+    function deleteCard(cardID) {
+        console.log(cardID)
+        axios.delete(`https://social-cards-app.onrender.com/users/my-cards/${cardID}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            }})
+            .then(() => setCardList((cardList) => cardList.filter((card) => card.id !== cardID)))
+    }
 
     const BackgroundColor = styled.section`
         background: ${props => props.background};
@@ -89,6 +100,7 @@ export default function Profile({ username, token }) {
                         Created By: {card.created_by}
                         <div className='navigate-cards'>
                             <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+                            <button onClick={() => deleteCard(card.id)}>Delete</button>
                         </div>
                     </p>
                     <br />
