@@ -5,7 +5,7 @@ export default function useFollow(userId) {
 
     async function toggleFollow() {
     const response = await fetch(`https://social-cards-app.onrender.com/cards/follow/${userId}`, {
-    method: 'PUT',
+    method: 'PATCH',
 });
 
     if (response.ok) {
