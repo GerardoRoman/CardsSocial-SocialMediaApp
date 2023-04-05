@@ -93,7 +93,7 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    # lookup_field = 'username'
+    lookup_field = 'username'
 
 
 class UserCardList(generics.ListAPIView):
