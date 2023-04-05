@@ -18,13 +18,20 @@ useEffect(() => {
     }).then((response) => {
         console.log(response.data.results)
         setCardList(response.data.results)
-        console.log(cardList)
     })
-
-    setCardNumber(cardList.id)
-    console.log(cardNumber)
     
+    setCardNumber(cardList.id)
 }, [])
+
+
+console.log(cardList)
+console.log(cardNumber)
+
+// const userCards = cardList.filter(creator => creator.created_by === username.token)
+// console.log(userCards)
+
+
+
 
 const TitleBox = styled.p`
     background-color: rgba(0, 0, 0, 0);
@@ -57,18 +64,13 @@ const FontChoice = styled.section`
         font-family: ${props => props.font};
 `
 
-// const userCards = cardList.find(creator => {
-//     return creator.created_by === username.token
-// })
-// console.log(userCards)
-
     return (cardList.length) > 0 && (
         <>
         <Avatar />
         <h1>{username.token}</h1>
             <div> follow/unfollow button </div>
             <h4> CARDS </h4>
-            {cardList.map((card => (
+            {cardList.filter(creator => creator.created_by === username.token).map((card => (
     <>
     <div className='card-container'>
     <div className='card'>
