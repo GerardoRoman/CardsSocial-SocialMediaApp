@@ -86,6 +86,17 @@ export default function Edit({ token }) {
         font-family: ${cardChoice.font};
     `
 
+    function handleSubmit(event) {
+        console.log('click)')
+            event.preventDefault();
+            console.log('Background Color: ', background);
+            console.log('Border Selection: ', border);
+            console.log('Font Selection: ', font);
+            // console.log('Title Text: ', title.current.value)
+            // console.log('Body Text: ', body.current.value);
+            // console.log('Back Text: ', back.current.value);
+    }
+
     return (
         <>
             <h1>Card View</h1>
@@ -144,7 +155,7 @@ export default function Edit({ token }) {
             <p className='created-by'>
                 Created By: {cardChoice.created_by}
             </p>
-            <form className='edit-form'>
+            <form className='edit-form' onClick={handleSubmit}>
                 <div>
                     <label>Background color: </label>
                     <select defaultValue={cardChoice.color}  >
@@ -155,11 +166,19 @@ export default function Edit({ token }) {
                 </div>
                 <div>
                     <label>Border type: </label>
-                    <input value={cardChoice.border} readOnly={true}  />
+                    <select defaultValue={cardChoice.border}  >
+                        <option value="dashed">Dashed</option>
+                        <option value='dotted'>Dotted</option>
+                        <option value='solid'>Solid</option>
+                        </select>
                 </div>
                 <div>
                     <label>Font type: </label>
-                    <input value={cardChoice.font} readOnly={true}  />
+                    <select defaultValue={cardChoice.font}  >
+                        <option value="Dancing Script">Cursive</option>
+                        <option value='Delicious Handrawn'>Handwritten</option>
+                        <option value='Playfair Display'>Plain</option>
+                        </select>
                 </div>
                 <div>
                     <label for='title-text'>Cover text: </label>
