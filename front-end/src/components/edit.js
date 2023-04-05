@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Edit({ token }) {
@@ -13,6 +14,7 @@ export default function Edit({ token }) {
     const [insideLeft, setInsideLeft] = useState('')
     const [isnideRight, setInsideRight] = useState('')
     const { cardNumber } = useParams()
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -95,6 +97,26 @@ export default function Edit({ token }) {
         font-family: ${font};
     `
 
+
+    function handlePost(resultsObject) {
+        axios.patch(`https://social-cards-app.onrender.com/users/my-cards/${cardNumber}`,
+            resultsObject,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${token}`
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                navigate("/profile")
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            ;
+    }
+
     function handleSubmit(event) {
         console.log('click)')
             event.preventDefault();
@@ -107,6 +129,7 @@ export default function Edit({ token }) {
                 font: font,
             }
             console.log(resultsObject)
+            handlePost(resultsObject)
     }
 
     return (
@@ -170,7 +193,7 @@ export default function Edit({ token }) {
             <p className='created-by'>
                 Created By: {cardChoice.created_by}
             </p>
-            <form className='edit-form' onClick={handleSubmit}>
+            <form className='edit-form' onSubmit={handleSubmit}>
                 <div>
                     <label>Background color: </label>
                     <select onChange={(event) => setBackground(event.target.value)} >
