@@ -56,9 +56,6 @@ h4 {
     text-align: center;
 }
 
-.login-form {
-    text-align: center;
-}
 
 .return-home {
     text-align: center;
@@ -75,4 +72,13 @@ h4 {
 .signUpLink {
     padding-top: 16px;
     padding-left: 8px;
+}
+
+.login-form {
+    text-align: center;
+}
+
+/* Sign Up Screen */
+.login-form {
+    text-align: center;
 }

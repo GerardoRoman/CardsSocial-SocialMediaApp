@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import axios from 'axios'
-import Error from './error.js'
 import { useNavigate } from 'react-router-dom'
 import ErrorPage from './404.js'
 
@@ -30,7 +29,7 @@ const Login = ({ setAuth }) => {
 
     return (
         <>
-            <h1 >Log In</h1>
+            <h1>Log In</h1>
             <div className='login-form'>
                 <form onFocus={() => setError(null)} onSubmit={handleSubmit}>
                     <div>
@@ -62,7 +61,7 @@ const Login = ({ setAuth }) => {
                     </div>
                     <div className="signUpPrompt" type='submit'>
                         <p>Not a member yet?</p>
-                        <a className="signUpLink" href="/auth/users/">Sign Up!</a>
+                        <a className="signUpLink" href="/signup">Sign Up!</a>
                     </div>
                 </form>
             </div>

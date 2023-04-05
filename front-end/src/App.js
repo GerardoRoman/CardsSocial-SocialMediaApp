@@ -43,31 +43,33 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='' />
-      </Routes>
-      {token ? (
-        <>
-          <Navbar
-            token={token}
-            username={username}
-            handleLogout={handleLogout}
-          />
-          <Routes>
-            <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
-            <Route path='/new' element={<NewCard username={username} token={token} />} />
-            <Route path='/profile' element={<Profile username={username} token={token} />} />
-            <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
-            <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
-            <Route path='/404page' element={<ErrorPage />} />
-          </Routes>
-        </>
-      ) : (
-        <div>
-          <Routes>
-            <Route path='/' element={token ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
-          </Routes>
-        </div>)
+      {/* <Routes>
+        <Route path='/signup' element={<Registration setAuth={setAuth} />} />
+      </Routes> */}
+      {
+        token ? (
+          <>
+            <Navbar
+              token={token}
+              username={username}
+              handleLogout={handleLogout}
+            />
+            <Routes>
+              <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
+              <Route path='/new' element={<NewCard username={username} token={token} />} />
+              <Route path='/profile' element={<Profile username={username} token={token} />} />
+              <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
+              <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
+              <Route path='/404page' element={<ErrorPage />} />
+            </Routes>
+          </>
+        ) : (
+          <div>
+            <Routes>
+              <Route path='/' element={token ? <CardList username={username} token={token} /> : <Login setAuth={setAuth} />} />
+              <Route path='/signup' element={<Registration setAuth={setAuth} />} />
+            </Routes>
+          </div>)
       }</>
   );
 }
