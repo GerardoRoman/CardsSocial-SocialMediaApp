@@ -13,10 +13,11 @@ const Registration = ({ setAuth }) => {
 
     const handleRegister = (event) => {
         console.log('AXIOS')
+        event.preventDefault()
         axios.post('https://social-cards-app.onrender.com/auth/users/', {
             username: userName,
             password: passWord
-        }).then(() => {
+        }).then(res => {
             console.log('2ndAXIOS')
             axios.post('https://social-cards-app.onrender.com/auth/token/login/',
                 {
@@ -27,7 +28,7 @@ const Registration = ({ setAuth }) => {
                     const token = res.data.auth_token;
                     setAuth(token, userName);
                     console.log(res.data);
-                    console.log('2ndAXIOS')
+                    console.log('3ndAXIOS')
                     navigate("/");
                 });
         })
