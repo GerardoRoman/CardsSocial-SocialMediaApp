@@ -71,3 +71,8 @@ h4 {
     display: flex;
     justify-content: center;
 }
+
+.signUpLink {
+    padding-top: 16px;
+    padding-left: 8px;
+}
