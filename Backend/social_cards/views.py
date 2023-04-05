@@ -1,5 +1,7 @@
 from .models import Followship, User
 from rest_framework.views import APIView
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -91,6 +93,7 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    # lookup_field = 'username'
 
 
 class UserCardList(generics.ListAPIView):
@@ -118,33 +121,37 @@ class UserCardDetail(generics.RetrieveUpdateDestroyAPIView):
         return Card.objects.filter(created_by=user)
 
 
-class FollowUser(generics.CreateAPIView):
-    ''' follow another user
+class FollowshipAPIView(APIView):
+    ''' follow and unfollow user
     '''
-    serializer_class = FollowshipSerializer
-    queryset = Followship.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        follower = self.request.user
-        serializer.save(follower=follower)
+    # handles HTTP POST requests to the view. The username parameter is passed in from the URL.
+    def post(self, request, username):
+        follower = request.user
+        # fetch following user from database based on username from URL. If the user doesn't exist, a 404 error is raised.
+        following = get_object_or_404(User, username=username)
 
+    # creates a new instance of the Followship model with the given follower and following parameters.
+        followship = Followship.objects.create(
+            follower=follower, following=following)
 
-# class UnfollowUser(generics.DestroyAPIView):
-#     ''' unfollow another user
-#     '''
-#     serializer_class = FollowshipSerializer
-#     queryset = Followship.objects.all()
-#     authentication_classes = [TokenAuthentication]
-#     permission_classes = [IsAuthenticated]
+    # creates new instance of the FollowshipSerializer class, which is responsible for serializing the Followship instance into a JSON-formatted response.
+        serializer = FollowshipSerializer(followship)
+    # creates an HTTP response using the serialized data obtained from the FollowshipSerializer and returns it.
+    # serializer.data property contains the serialized data in JSON format.
+    # HTTP status code 201 CREATED indicates that the request was successful and a new resource has been created.
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-#     def get_object(self):
-#         follower = self.request.user
-#         following =
-#         Followship.objects.get(follower=follower, following=following).delete()
+    def delete(self, request, username):
+        follower = request.user
+        following = get_object_or_404(User, username=username)
 
-#     def perform_destroy(self, instance):
-#         instance.delete()
+        # fetches the Followship object from the database that links the follower and following users.
+        followship = get_object_or_404(
+            Followship, follower=follower, following=following)
 
-# # class UsersYouFollowList():
+        followship.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
