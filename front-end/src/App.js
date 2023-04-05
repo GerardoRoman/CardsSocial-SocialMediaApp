@@ -9,6 +9,7 @@ import Login from './components/login.js'
 import Registration from './components/newuser.js'
 import useLocalStorageState from 'use-local-storage-state'
 import { Route, Routes } from 'react-router-dom'
+import ViewOtherProfile from './components/view-other-profile';
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path='/new' element={<NewCard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/cardview/:cardNumber' element= {<Cards />} />
+          <Route path='/viewotherprofile/:currentProfile' element= {<ViewOtherProfile />} />
         </Routes>
         </>
       ) : (

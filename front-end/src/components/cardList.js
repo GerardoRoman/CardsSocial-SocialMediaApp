@@ -92,7 +92,7 @@ export default function CardList() {
             </div>
             <br/>
         <p className='created-by'>
-    Created By: {card.created_by}
+    Created By: <a href={`/viewotherprofile/${card.created_by}`}>{card.created_by}</a>
         <div className='navigate-cards'>
             <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
         </div>

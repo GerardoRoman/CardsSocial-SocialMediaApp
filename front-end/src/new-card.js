@@ -173,12 +173,12 @@ function NewCard(){
         </span>
         <br/>
         <span>
-        Select a background border!<br/>
+        Select a border!<br/>
             {borderChoices.map(borders => <button className='ind-but' onClick={borderChoice}>{borders}</button>)}
         </span>
         <br/>
         <span>
-        Select a background font!<br/>
+        Select a font!<br/>
             {fontChoices.map(fonts => <button className='ind-but' onClick={fontChoice}>{fonts}</button>)}
         </span>   
         
