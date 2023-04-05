@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 
-export default function Cards({ token }) {
+
+export default function Edit({ token }) {
     const [cardChoice, setCardChoice] = useState(0)
     const [background, setBackground] = useState('');
     const [border, setBorder] = useState('');
@@ -85,14 +86,6 @@ export default function Cards({ token }) {
         font-family: ${cardChoice.font};
     `
 
-    console.log(cardChoice)
-    console.log(cardChoice.title_text)
-    console.log(cardChoice.card_front_message)
-    console.log(cardChoice.card_back_message)
-    console.log(cardChoice.border)
-    console.log(cardChoice.color)
-    console.log(cardChoice.font)
-
     return (
         <>
             <h1>Card View</h1>
@@ -151,6 +144,39 @@ export default function Cards({ token }) {
             <p className='created-by'>
                 Created By: {cardChoice.created_by}
             </p>
+            <form className='edit-form'>
+                <div>
+                    <label>Background color: </label>
+                    <select defaultValue={cardChoice.color}  >
+                        <option value="red">Red</option>
+                        <option value='blue'>Blue</option>
+                        <option value='green'>Green</option>
+                        </select>
+                </div>
+                <div>
+                    <label>Border type: </label>
+                    <input value={cardChoice.border} readOnly={true}  />
+                </div>
+                <div>
+                    <label>Font type: </label>
+                    <input value={cardChoice.font} readOnly={true}  />
+                </div>
+                <div>
+                    <label for='title-text'>Cover text: </label>
+                    <textarea value={cardChoice.title_text}/>
+                </div>
+                <div>
+                    <label for='body-text'>Inside left: </label>
+                    <textarea value={cardChoice.card_front_message}/>
+                </div>
+                <div>
+                    <label for='back-text'>Inside Right: </label>
+                    <textarea value={cardChoice.card_back_message}/>
+                </div>
+                <div className='submit'>
+                    <button type='submit'>Submit</button>
+                </div>
+            </form>
         </>
     )
 }
