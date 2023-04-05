@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
 
-export default function ViewOtherProfile (username, token) {
+export default function ViewOtherProfile ({ username, token }) {
     const [cardList, setCardList] = useState(0)
     const [cardNumber, setCardNumber] = useState(1)
     const {currentProfile} = useParams()
