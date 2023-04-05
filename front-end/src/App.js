@@ -53,9 +53,7 @@ function App() {
         <>
           <Routes>
 
-            <Route path='/Profile' element={<Profile username={username} token={token} />} />
             <Route path='/' element={<CardList hi={true} username={username} token={token} />} />
-            <Route path='/profile' element={<Profile username={username} token={token} />} />
             <Route path='/new' element={<NewCard username={username} token={token} />} />
             <Route path='/profile' element={<Profile username={username} token={token} />} />
             <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
