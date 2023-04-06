@@ -19,5 +19,7 @@ urlpatterns = [
          name='user-following-list'),
     path('users/following/cards/', views.ListFollowingCards.as_view(),
          name='user-following-cards'),
+    path('followship-count/', views.CountFollowersAndFollowing.as_view(),
+         name='followship-count'),
 
 ]
