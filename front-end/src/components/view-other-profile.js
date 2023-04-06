@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
 import FollowUnfollowButton from './followUnfollowButton.js'
 import Button from 'react-bootstrap/Button'
+import { Followers } from './followers.js';
 
 export default function ViewOtherProfile({ username, token }) {
     const [cardList, setCardList] = useState(0)

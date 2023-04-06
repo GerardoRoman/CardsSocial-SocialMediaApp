@@ -4,7 +4,8 @@ import axios from 'axios'
 import styled from 'styled-components';
 import { FollowUnfollowButton } from './followUnfollowButton.js'
 import { FollowingList, FollowersList } from './followersList.js'
-import { Button } from 'react-bootstrap'
+import  { Button }  from 'react-bootstrap'
+import { Followers } from './followers.js'
 
 
 export default function Profile({ username, token }) {
@@ -77,8 +78,11 @@ export default function Profile({ username, token }) {
         <>
             <Avatar />
             <h1>{username}</h1>
+            <div className='followandunfollow'>
             <FollowingList username={username} token={token} />
             <FollowersList username={username} token={token} />
+            <Followers username={username} token={token}/>
+            </div>
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username).map((card => (
                 <>

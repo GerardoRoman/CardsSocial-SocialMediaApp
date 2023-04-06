@@ -47,8 +47,12 @@ h4 {
 
 .following, .followers {
     margin-left: 3%;
+    width: 20%;
 }
 
+.follower-accordian {
+    width: 20%;
+}
 .customize-buttons {
     /* border: 1px solid black; */
     display: flex;
