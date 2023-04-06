@@ -2,7 +2,13 @@ import Avatar from './profile-icon.js'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
+<<<<<<< HEAD
 import { FollowingList } from './followersList.js'
+=======
+import { FollowUnfollowButton } from './followUnfollowButton.js'
+import { FollowingList, FollowersList } from './followersList.js'
+import  { Button }  from 'react-bootstrap'
+>>>>>>> main
 
 
 export default function Profile({ username, token }) {
@@ -63,8 +69,8 @@ export default function Profile({ username, token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${props => props.border} black;  
-        width: 97%;
-        height: 97%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`
@@ -76,12 +82,13 @@ export default function Profile({ username, token }) {
             <Avatar />
             <h1>{username}</h1>
             <FollowingList username={username} token={token} />
+            <FollowersList username={username} token={token} />
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username).map((card => (
                 <>
                     <div className='card-container'>
                         <div className='card'>
-                            <h4>COVER</h4>
+                            
                             <BackgroundColor background={card.color}>
                                 <BorderChoice border={card.border}>
                                     <FontChoice font={card.font}>
@@ -99,9 +106,9 @@ export default function Profile({ username, token }) {
                     <p className='created-by'>
                         Created By: {card.created_by}
                         <div className='navigate-cards'>
-                            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
-                            <button onClick={() => deleteCard(card.id)}>Delete</button>
-                            <button><a href={`/edit/${card.id}`}>Edit</a></button>
+                        <Button variant="outline-dark"><a href={`/cardview/${card.id}`}>Open Card</a></Button>
+                        <Button variant="outline-dark" onClick={() => deleteCard(card.id)}>Delete</Button>
+                        <Button variant="outline-dark"><a href={`/edit/${card.id}`}>Edit</a></Button>
                         </div>
                     </p>
                     <br />

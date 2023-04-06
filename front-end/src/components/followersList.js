@@ -1,6 +1,30 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 
+export function FollowingList({token}) {
+    const [following, setFollowing] = useState([]);
+    const [count, setCount] = useState('')
+// console.log(token)
+useEffect(() => {
+    axios.get('https://social-cards-app.onrender.com/followship-count/', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+            }
+    }).then((response) => {
+        setFollowing(response.data)
+        setCount(response.data.following_count)
+        // console.log(response.data)
+    })
+}, [])
+
+    return (
+        <>
+        <h3>Following: {count}</h3>
+        </>
+    )
+}
+
 export function FollowersList(token) {
     const [followers, setFollowers] = useState([]);
     const [count, setCount] = useState(0)
@@ -20,7 +44,7 @@ useEffect(() => {
 
     return (
         <>
-            <h3>Followers: {count}</h3>
+            <h3 className='followers'>Followers: {count}</h3>
         <ul>
             {
                 followers && followers.map((follower) => (
@@ -33,35 +57,3 @@ useEffect(() => {
         </>
     )
 }
-
-export function FollowingList(token) {
-    const [following, setFollowing] = useState([]);
-console.log(token.token)
-useEffect(() => {
-    axios.get('https://social-cards-app.onrender.com/users/following', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `token ${token.token}`
-            }
-    }).then((response) => {
-        setFollowing(response.data.results)
-        console.log(response.data.results)
-    })
-}, [])
-
-    return (
-        <>
-        <h3>Following: {following.count}</h3>
-        <ul>
-            {
-                following && following.map((follower) => (
-            <li>
-                <button>{follower.username}</button>
-            </li>
-                ))
-}
-        </ul>
-        </>
-    )
-}
-

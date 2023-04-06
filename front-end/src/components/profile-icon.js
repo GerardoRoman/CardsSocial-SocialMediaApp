@@ -5,7 +5,7 @@ import "../styles/profile-icon.css"
 const Avatar = () => {
     return (
         <IconContext.Provider value={{ style: {fontSize: '75px', color: "black"}}} >
-        <div>
+        <div className='profile-icon'>
             <CgProfile />
         </div>
         </IconContext.Provider> 
