@@ -3,12 +3,10 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import  { Button }  from 'react-bootstrap'
 
-
-
 function FollowUnfollowButton({ username, token }) {
     const [follow, setFollow] = useState()
     const { currentProfile } = useParams()
-    const [following, setFollowing] = useState()
+    const [following, setFollowing] = useState([])
 
     
     useEffect(() =>
@@ -36,6 +34,7 @@ function FollowUnfollowButton({ username, token }) {
                 }
             }).then(res => {
                 setFollow(res.data.following);
+                window.location.reload()
             })
     }; 
 
@@ -47,6 +46,7 @@ function FollowUnfollowButton({ username, token }) {
             }
         }).then(res => {
             setFollow(res.data.following);
+            window.location.reload()
         })
     };
     // console.log(isFollowing)
@@ -57,7 +57,7 @@ function FollowUnfollowButton({ username, token }) {
     return (
         <>
         <div className='followandunfollow'>
-            {follow ? <Button variant='outline-dark' onClick={handleUnfollow}>Unfollow!</Button> : <Button variant='outline-dark' onClick={handleFollow}>Follow!</Button>}
+            {following.includes(currentProfile) ? <Button variant='outline-dark' onClick={handleUnfollow}>Unfollow!</Button> : <Button variant='outline-dark' onClick={handleFollow}>Follow!</Button>}
         </div>
 
         </>
