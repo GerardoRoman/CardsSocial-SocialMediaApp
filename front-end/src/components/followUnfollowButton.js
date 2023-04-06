@@ -4,13 +4,11 @@ import { useParams } from 'react-router-dom'
 
 
 function FollowUnfollowButton({ username, token }) {
-    const [follow, setFollow] = useState('')
-    const [unfollow, setUnfollow] = useState('')
+    const [follow, setFollow] = useState(false)
     const { currentProfile } = useParams()
 
 
     const handleFollow = (event) => {
-        event.preventDefault()
         axios.post(`https://social-cards-app.onrender.com/follow/${currentProfile}/`, {},
             {
                 headers: {
@@ -18,21 +16,18 @@ function FollowUnfollowButton({ username, token }) {
                     'Authorization': `Token ${token}`
                 }
             }).then(res => {
-                setFollow(res.data.results.following);
-                console.log(res.data.results.following);
+                setFollow(res.data.following);
             })
     };
 
     const handleUnfollow = (event) => {
-        event.preventDefault()
         axios.delete(`https://social-cards-app.onrender.com/follow/${currentProfile}/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
             }
         }).then(res => {
-            setUnfollow(res.data.results.following);
-            console.log(res.data.results.following);
+            setFollow(res.data.following);
         })
     };
 
@@ -43,12 +38,7 @@ function FollowUnfollowButton({ username, token }) {
     return (
         <>
             {follow ? <button onClick={handleUnfollow}>Unfollow!</button> : <button onClick={handleFollow}>Follow!</button>}
-            {/* <button onClick={handleUnfollow}>Unfollow!</button>
-            <button onClick={handleFollow}>Follow!</button> */}
-            {/* <button
-                onClick={setFollow ? { handleUnfollow } : handleFollow}
-                buttonText={`${setFollow ? "Unfollow" : "Follow"}`} */}
-            {/* /> */}
+
 
         </>
     )
