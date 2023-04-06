@@ -36,11 +36,19 @@ function FollowUnfollowButton({ username, token }) {
         })
     };
 
+    console.log(follow)
+    console.log(setFollow)
+    console.log(currentProfile)
+
     return (
         <>
             {follow ? <button onClick={handleUnfollow}>Unfollow!</button> : <button onClick={handleFollow}>Follow!</button>}
             {/* <button onClick={handleUnfollow}>Unfollow!</button>
             <button onClick={handleFollow}>Follow!</button> */}
+            {/* <button
+                onClick={setFollow ? { handleUnfollow } : handleFollow}
+                buttonText={`${setFollow ? "Unfollow" : "Follow"}`} */}
+            {/* /> */}
 
         </>
     )

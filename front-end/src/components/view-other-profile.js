@@ -69,8 +69,8 @@ export default function ViewOtherProfile({ username, token }) {
             <FollowUnfollowButton username={username} token={token} />
             <h4> CARDS </h4>
             <div className='followandunfollow'>
-                <div><Button variant='outline-dark'>Follow</Button></div>
-                <div><Button variant='outline-dark'>Unfollow</Button></div>
+                {/* <div><Button variant='outline-dark'>Follow</Button></div>
+                <div><Button variant='outline-dark'>Unfollow</Button></div> */}
             </div>
 
             {cardList.filter(creator => creator.created_by === currentProfile).map((card => (
