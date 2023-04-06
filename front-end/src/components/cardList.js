@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import NewCard from './new-card';
 import Cards from './cards.js';
 import { Navigate } from "react-router-dom";
+import  Button  from 'react-bootstrap/Button'
+
 
 
 
@@ -53,8 +55,8 @@ export default function CardList({ token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${props => props.border} black;  
-        width: 97%;
-        height: 97%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`
@@ -76,7 +78,7 @@ export default function CardList({ token }) {
                 <>
                     <div className='card-container'>
                         <div className='card'>
-                            <h4>COVER</h4>
+                            
                             <BackgroundColor background={card.color}>
                                 <BorderChoice border={card.border}>
                                     <FontChoice font={card.font}>
@@ -94,7 +96,7 @@ export default function CardList({ token }) {
                     <p className='created-by'>
                         Created By: <a href={`/viewotherprofile/${card.created_by}`}>{card.created_by}</a>
                         <div className='navigate-cards'>
-                            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+                        <Button variant="outline-dark"><a href={`/cardview/${card.id}`}>Open Card</a></Button>
                         </div>
                     </p>
                     <br />
