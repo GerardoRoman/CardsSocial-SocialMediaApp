@@ -25,7 +25,7 @@ return (
     <Accordion className='follower-accordian'>
     <Accordion.Item eventKey="0">
         <Accordion.Header>
-    <h5>Followers</h5>
+    <h5>Following</h5>
     </Accordion.Header>
     <AccordionBody>
     <ul>{followers.map(username => <li className='followers'><a href={`/viewotherprofile/${username.username}`}>
