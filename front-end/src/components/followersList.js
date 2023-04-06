@@ -20,7 +20,7 @@ useEffect(() => {
 
     return (
         <>
-            <h3>Followers: {count}</h3>
+            <h3 className='followers'>Followers: {count}</h3>
         <ul>
             {
                 followers && followers.map((follower) => (
@@ -51,7 +51,7 @@ useEffect(() => {
 
     return (
         <>
-        <h3>Following: {following.count}</h3>
+        <h3 className='following'>Following: {following.count}</h3>
         <ul>
             {
                 following && following.map((follower) => (

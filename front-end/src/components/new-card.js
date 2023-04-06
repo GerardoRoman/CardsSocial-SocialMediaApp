@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
+import Button from 'react-bootstrap/Button'
 
 
 function NewCard({ token }) {
@@ -73,8 +73,8 @@ function NewCard({ token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${border} black;  
-        width: 98%;
-        height: 98%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`
@@ -172,17 +172,17 @@ function NewCard({ token }) {
                 <br />
                 <span>
                     Select a background color!<br />
-                    {colorChoices.map(colors => <button className='ind-but' onClick={backgroundChoice}>{colors}</button>)}
+                    {colorChoices.map(colors => <Button variant='outline-dark' className='ind-but' onClick={backgroundChoice}>{colors}</Button>)}
                 </span>
                 <br />
                 <span>
                     Select a border!<br />
-                    {borderChoices.map(borders => <button className='ind-but' onClick={borderChoice}>{borders}</button>)}
+                    {borderChoices.map(borders => <Button variant='outline-dark' className='ind-but' onClick={borderChoice}>{borders}</Button>)}
                 </span>
                 <br />
                 <span>
                     Select a font!<br />
-                    {fontChoices.map(fonts => <button className='ind-but' onClick={fontChoice}>{fonts}</button>)}
+                    {fontChoices.map(fonts => <Button variant='outline-dark' className='ind-but' onClick={fontChoice}>{fonts}</Button>)}
                 </span>
 
             </div>
@@ -235,8 +235,6 @@ function NewCard({ token }) {
                 </div>
             </div>
 
-            <br></br>
-
             <form onSubmit={handleSubmit}>
                 <div>
                     <label></label>
@@ -263,7 +261,7 @@ function NewCard({ token }) {
                     <input ref={back} hidden />
                 </div>
                 <div className='submit'>
-                    <button type='submit'>Submit</button>
+                <Button variant="outline-dark" type='submit'>Submit</Button>
                 </div>
             </form>
         </>

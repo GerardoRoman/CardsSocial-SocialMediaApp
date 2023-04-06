@@ -4,6 +4,7 @@ import axios from 'axios'
 import styled from 'styled-components';
 import { FollowUnfollowButton } from './followUnfollowButton.js'
 import { FollowingList } from './followersList.js'
+import  { Button }  from 'react-bootstrap'
 
 
 export default function Profile({ username, token }) {
@@ -64,8 +65,8 @@ export default function Profile({ username, token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${props => props.border} black;  
-        width: 97%;
-        height: 97%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`
@@ -82,7 +83,7 @@ export default function Profile({ username, token }) {
                 <>
                     <div className='card-container'>
                         <div className='card'>
-                            <h4>COVER</h4>
+                            
                             <BackgroundColor background={card.color}>
                                 <BorderChoice border={card.border}>
                                     <FontChoice font={card.font}>
@@ -100,9 +101,9 @@ export default function Profile({ username, token }) {
                     <p className='created-by'>
                         Created By: {card.created_by}
                         <div className='navigate-cards'>
-                            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
-                            <button onClick={() => deleteCard(card.id)}>Delete</button>
-                            <button><a href={`/edit/${card.id}`}>Edit</a></button>
+                        <Button variant="outline-dark"><a href={`/cardview/${card.id}`}>Open Card</a></Button>
+                        <Button variant="outline-dark" onClick={() => deleteCard(card.id)}>Delete</Button>
+                        <Button variant="outline-dark"><a href={`/edit/${card.id}`}>Edit</a></Button>
                         </div>
                     </p>
                     <br />

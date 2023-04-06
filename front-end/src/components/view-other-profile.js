@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 export default function ViewOtherProfile({ username, token }) {
     const [cardList, setCardList] = useState(0)
@@ -52,8 +53,8 @@ export default function ViewOtherProfile({ username, token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${props => props.border} black;  
-        width: 97%;
-        height: 97%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`
@@ -64,9 +65,11 @@ export default function ViewOtherProfile({ username, token }) {
         <>
             <Avatar />
             <h1>{currentProfile}</h1>
-            <div><button>Follow</button></div>
-            <div><button>Unfollow</button></div>
-            <h4> CARDS </h4>
+            <div className='followandunfollow'>
+            <div><Button variant='outline-dark'>Follow</Button></div>
+            <div><Button variant='outline-dark'>Unfollow</Button></div>
+            </div>
+            
             {cardList.filter(creator => creator.created_by === currentProfile).map((card => (
                 <>
                     <div className='card-container'>
@@ -89,7 +92,7 @@ export default function ViewOtherProfile({ username, token }) {
                     <p className='created-by'>
                         Created By: {card.created_by}
                         <div className='navigate-cards'>
-                            <button><a href={`/cardview/${card.id}`}>Open Card</a></button>
+                            <Button variant='outline-dark'><a href={`/cardview/${card.id}`}>Open Card</a></Button>
                         </div>
                     </p>
                     <br />
