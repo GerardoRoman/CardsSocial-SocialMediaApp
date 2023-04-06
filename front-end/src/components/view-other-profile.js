@@ -3,11 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
-<<<<<<< HEAD
 import FollowUnfollowButton from './followUnfollowButton.js'
-=======
 import Button from 'react-bootstrap/Button'
->>>>>>> main
 
 export default function ViewOtherProfile({ username, token }) {
     const [cardList, setCardList] = useState(0)
@@ -69,18 +66,13 @@ export default function ViewOtherProfile({ username, token }) {
         <>
             <Avatar />
             <h1>{currentProfile}</h1>
-<<<<<<< HEAD
-            {/* <div><button >Follow</button></div>
-            <div><button>Unfollow</button></div> */}
             <FollowUnfollowButton username={username} token={token} />
             <h4> CARDS </h4>
-=======
             <div className='followandunfollow'>
-            <div><Button variant='outline-dark'>Follow</Button></div>
-            <div><Button variant='outline-dark'>Unfollow</Button></div>
+                <div><Button variant='outline-dark'>Follow</Button></div>
+                <div><Button variant='outline-dark'>Unfollow</Button></div>
             </div>
-            
->>>>>>> main
+
             {cardList.filter(creator => creator.created_by === currentProfile).map((card => (
                 <>
                     <div className='card-container'>
