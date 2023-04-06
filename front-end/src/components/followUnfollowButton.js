@@ -40,4 +40,4 @@ function FollowUnfollowButton({ token }) {
     )
 }
 
-export default FollowUnfollowButton();
+export default FollowUnfollowButton;
