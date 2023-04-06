@@ -187,6 +187,15 @@ Description: Follow or unfollow another user, if `POST` request it will follow u
 ___
 
 
+## 🦢   /followship-count/
+
+Description: View count of user's followers and people they are following
+
+- Allowed Request: GET
+- Content-Type: application/json
+
+
+___
 
 ## 🐝   /auth/users/
 
