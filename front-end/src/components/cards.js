@@ -43,16 +43,18 @@ export default function Cards({ token }) {
     const StyledTextArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
         border-color: rgba(0, 0, 0, 0);
-        overflow: auto;
+        overflow: hidden;
         outline: none;
         // border: 1px solid black;
         width: 75%;
-        height: 23rem;
+        height: 16rem;
         rows: "33";
         cols: "50";
         resize: none;
         font-family: ${cardChoice.font};
         font-size: 25px;
+        text-overflow: ellipsis;
+        text-size-adjust: auto;
     `
     const StyledBackArea = styled.textarea`
         background-color: rgba(0, 0, 0, 0);
@@ -77,8 +79,8 @@ export default function Cards({ token }) {
         `
     const BorderChoice = styled.section`
         border: 5px ${cardChoice.border} black;  
-        width: 98%;
-        height: 98%;
+        width: 100%;
+        height: 100%;
     `
 
     const FontChoice = styled.section`

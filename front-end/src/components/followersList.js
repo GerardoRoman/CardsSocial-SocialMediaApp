@@ -44,7 +44,7 @@ useEffect(() => {
 
     return (
         <>
-            <h3>Followers: {count}</h3>
+            <h3 className='followers'>Followers: {count}</h3>
         <ul>
             {
                 followers && followers.map((follower) => (
