@@ -2,7 +2,6 @@ import Avatar from './profile-icon.js'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
-import { FollowUnfollowButton } from './followUnfollowButton.js'
 import { FollowingList } from './followersList.js'
 
 
