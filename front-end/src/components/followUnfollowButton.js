@@ -1,11 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import  { Button }  from 'react-bootstrap'
+
 
 
 function FollowUnfollowButton({ username, token }) {
-    const [follow, setFollow] = useState(false)
+    const [follow, setFollow] = useState()
     const { currentProfile } = useParams()
+    const [following, setFollowing] = useState()
+
+    
+    useEffect(() =>
+        { axios.get('https://social-cards-app.onrender.com/following',
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            }
+        }).then(res => {
+            console.log(res.data)
+            setFollowing(res.data.results.map(result => result.username))
+        })
+    }, []); 
+
+    console.log(following)
 
 
     const handleFollow = (event) => {
@@ -18,7 +37,7 @@ function FollowUnfollowButton({ username, token }) {
             }).then(res => {
                 setFollow(res.data.following);
             })
-    };
+    }; 
 
     const handleUnfollow = (event) => {
         axios.delete(`https://social-cards-app.onrender.com/follow/${currentProfile}/`, {
@@ -30,15 +49,16 @@ function FollowUnfollowButton({ username, token }) {
             setFollow(res.data.following);
         })
     };
-
-    console.log(follow)
-    console.log(setFollow)
-    console.log(currentProfile)
+    // console.log(isFollowing)
+    // console.log(follow)
+    // console.log(setFollow)
+    // console.log(currentProfile)
 
     return (
         <>
-            {follow ? <button onClick={handleUnfollow}>Unfollow!</button> : <button onClick={handleFollow}>Follow!</button>}
-
+        <div className='followandunfollow'>
+            {follow ? <Button variant='outline-dark' onClick={handleUnfollow}>Unfollow!</Button> : <Button variant='outline-dark' onClick={handleFollow}>Follow!</Button>}
+        </div>
 
         </>
     )
