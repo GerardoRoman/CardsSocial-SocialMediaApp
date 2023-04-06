@@ -41,6 +41,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FollowshipSerializer(serializers.ModelSerializer):
+    follower = serializers.StringRelatedField(many=False)
+    following = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Followship
