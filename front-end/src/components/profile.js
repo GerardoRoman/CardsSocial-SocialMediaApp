@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
 import { FollowUnfollowButton } from './followUnfollowButton.js'
-import { FollowingList } from './followersList.js'
+import { FollowingList, FollowersList } from './followersList.js'
 import  { Button }  from 'react-bootstrap'
 
 
