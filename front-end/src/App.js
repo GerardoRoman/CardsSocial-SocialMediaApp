@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import ViewOtherProfile from './components/view-other-profile';
 import axios from 'axios';
 import ErrorPage from './components/404';
-import { FollowingList, FollowersList } from './components/followersList';
+import { FollowingList } from './components/followersList';
 import Edit from './components/edit.js'
 
 
@@ -59,8 +59,8 @@ function App() {
             <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
             <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
             <Route path='/404page' element={<ErrorPage />} />
-            <Route path='/follow-list' element={<FollowersList username={username} token={token} />} />
             <Route path='/edit/:cardNumber' element={<Edit username={username} token={token}/>} />
+            <Route path='/follow-list' element={<FollowingList username={username} token={token} />} />
           </Routes>
         </>
       ) : (
