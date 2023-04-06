@@ -62,6 +62,9 @@ const Registration = ({ setAuth }) => {
                         >
                         </input>
                     </div>
+                    <div className="disclaimerPassword">
+                        <p>* password must be a minimum of 8 characters *</p>
+                    </div>
                     <div>
                         <button type='submit'>Submit!</button>
                     </div>
