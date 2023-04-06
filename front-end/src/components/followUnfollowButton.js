@@ -33,9 +33,10 @@ function FollowUnfollowButton({ token }) {
 
 
     return (
-        <button onClick={handleFollow}>Follow!</button>
-
-
+        <>
+            <button onClick={handleFollow}>Follow!</button>
+            <button onClick={handleUnfollow}>Unfollow!</button>
+        </>
     )
 }
 
