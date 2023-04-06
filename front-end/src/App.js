@@ -58,7 +58,7 @@ function App() {
             <Route path='/cardview/:cardNumber' element={<Cards username={username} token={token} />} />
             <Route path='/viewotherprofile/:currentProfile' element={<ViewOtherProfile username={username} token={token} />} />
             <Route path='/404page' element={<ErrorPage />} />
-            <Route path='/edit/:cardNumber' element={<Edit username={username} token={token}/>} />
+            <Route path='/edit/:cardNumber' element={<Edit username={username} token={token} />} />
           </Routes>
         </>
       ) : (

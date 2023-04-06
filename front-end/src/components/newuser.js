@@ -12,13 +12,11 @@ const Registration = ({ setAuth }) => {
 
 
     const handleRegister = (event) => {
-        console.log('AXIOS')
         event.preventDefault()
         axios.post('https://social-cards-app.onrender.com/auth/users/', {
             username: userName,
             password: passWord
         }).then(res => {
-            console.log('2ndAXIOS')
             axios.post('https://social-cards-app.onrender.com/auth/token/login/',
                 {
                     username: userName,
