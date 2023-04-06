@@ -2,6 +2,8 @@ import Avatar from './profile-icon.js'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
+// import FollowBtn from './followBtn.js'
+import { FollowingList } from './followersList.js'
 
 
 export default function Profile({ username, token }) {
@@ -74,7 +76,7 @@ export default function Profile({ username, token }) {
         <>
             <Avatar />
             <h1>{username}</h1>
-            <div>Followers</div>
+            <FollowingList username={username} token={token} />
             <h4> CARDS </h4>
             {cardList.filter(creator => creator.created_by === username).map((card => (
                 <>
