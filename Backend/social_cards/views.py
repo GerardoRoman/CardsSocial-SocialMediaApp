@@ -184,3 +184,19 @@ class ListFollowingCards(generics.ListAPIView):
         users_following = [followship.following for followship in followships]
         following_cards = Card.objects.filter(created_by__in=users_following)
         return following_cards
+
+
+class CountFollowersAndFollowing(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request, *args, **kwargs):
+        user = self.request.user
+        follower_count = Followship.objects.filter(following=user).count()
+        following_count = Followship.objects.filter(follower=user).count()
+        count_display = {
+            'followers_count': follower_count,
+            'following_count': following_count
+        }
+        return Response(count_display, status=status.HTTP_200_OK)

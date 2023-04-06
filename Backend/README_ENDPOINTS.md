@@ -153,7 +153,7 @@ Description: If `GET` request view of card the logged in user has made, if `PATC
 ___
 
 
-## 🦕   /users/following/
+## 🦕   /following/
 
 Description: Get list of users you are following
 
@@ -187,6 +187,15 @@ Description: Follow or unfollow another user, if `POST` request it will follow u
 ___
 
 
+## 🦢   /followship-count/
+
+Description: View count of user's followers and people they are following
+
+- Allowed Request: GET
+- Content-Type: application/json
+
+
+___
 
 ## 🐝   /auth/users/
 
