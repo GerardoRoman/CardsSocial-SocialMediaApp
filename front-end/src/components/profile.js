@@ -88,7 +88,7 @@ export default function Profile({ username, token }) {
                 <>
                     <div className='card-container'>
                         <div className='card'>
-                            
+
                             <BackgroundColor background={card.color}>
                                 <BorderChoice border={card.border}>
                                     <FontChoice font={card.font}>
@@ -106,9 +106,9 @@ export default function Profile({ username, token }) {
                     <p className='created-by'>
                         Created By: {card.created_by}
                         <div className='navigate-cards'>
-                        <Button variant="outline-dark"><a href={`/cardview/${card.id}`}>Open Card</a></Button>
-                        <Button variant="outline-dark" onClick={() => deleteCard(card.id)}>Delete</Button>
-                        <Button variant="outline-dark"><a href={`/edit/${card.id}`}>Edit</a></Button>
+                            <Button variant="outline-dark"><a href={`/cardview/${card.id}`}>Open Card</a></Button>
+                            <Button variant="outline-dark" onClick={() => deleteCard(card.id)}>Delete</Button>
+                            <Button variant="outline-dark"><a href={`/edit/${card.id}`}>Edit</a></Button>
                         </div>
                     </p>
                     <br />

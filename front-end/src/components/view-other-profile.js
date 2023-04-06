@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
+import FollowUnfollowButton from './followUnfollowButton.js'
 import Button from 'react-bootstrap/Button'
 import { Followers } from './followers.js';
 
@@ -66,11 +67,13 @@ export default function ViewOtherProfile({ username, token }) {
         <>
             <Avatar />
             <h1>{currentProfile}</h1>
+            <FollowUnfollowButton username={username} token={token} />
+            <h4> CARDS </h4>
             <div className='followandunfollow'>
-            <div><Button variant='outline-dark'>Follow</Button></div>
-            <div><Button variant='outline-dark'>Unfollow</Button></div>
+                {/* <div><Button variant='outline-dark'>Follow</Button></div>
+                <div><Button variant='outline-dark'>Unfollow</Button></div> */}
             </div>
-            
+
             {cardList.filter(creator => creator.created_by === currentProfile).map((card => (
                 <>
                     <div className='card-container'>
