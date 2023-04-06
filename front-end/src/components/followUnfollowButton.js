@@ -40,4 +40,4 @@
 //     )
 // }
 
-// export default FollowUnfollowButton();
+// export default FollowUnfollowButton;
