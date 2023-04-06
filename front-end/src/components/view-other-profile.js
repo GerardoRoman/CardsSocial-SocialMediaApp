@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import { Followers } from './followers.js';
 
 export default function ViewOtherProfile({ username, token }) {
     const [cardList, setCardList] = useState(0)
