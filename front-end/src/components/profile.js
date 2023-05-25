@@ -32,21 +32,6 @@ export default function Profile({ username, token }) {
     console.log(cardList)
     console.log(cardNumber)
 
-    const TitleBox = styled.p`
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
-    overflow: auto;
-    outline: none;
-    // border: 1px solid black;
-    width: 100%;
-    height: 3rem;
-    font-family: ${props => props.font};
-    font-size: 30px;
-    resize: none;
-    text-align: center;
-    // border-bottom: 2px solid black
-    margin-top: 30%;
-    `
 
     function deleteCard(cardID) {
         console.log(cardID)
@@ -59,20 +44,6 @@ export default function Profile({ username, token }) {
             .then(() => setCardList((cardList) => cardList.filter((card) => card.id !== cardID)))
     }
 
-    const BackgroundColor = styled.section`
-        background: ${props => props.background};
-        width: 100%;
-        height: 100%;
-        `
-    const BorderChoice = styled.section`
-        border: 5px ${props => props.border} black;  
-        width: 100%;
-        height: 100%;
-    `
-
-    const FontChoice = styled.section`
-        font-family: ${props => props.font};
-`
 
     return (cardList.length) > 0 && (
         <>
